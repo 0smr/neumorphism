@@ -1,0 +1,17 @@
+{
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex"
+    ],
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.typeinfo": "qml",
+        "*.qrc": "xml",
+        "*.user": "xml",
+        "qqmlapplicationengine": "cpp",
+        "xlocale": "c"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Qt/5.15.2/mingw81_64/**",
+                "C:/Qt/Tools/mingw810_64/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/Users/seyye/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Qt/5.15.2/MinGW 8.1.0 (64-bit)/Qt 5.15.2 (MinGW 8.1.0 64-bit).lnk",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
