@@ -1,0 +1,29 @@
+module Neumorphism
+typeinfo neumorphism.qmltypes
+
+Script                  1.0 script.js
+
+singleton Neumorphism   1.0 Neumorphism.qml
+
+internal Shadow         Base/Shadow.qml
+internal Border         Base/Border.qml
+
+RoundedInEffect         1.0 Base/RoundedInEffect.qml
+RoundedOutEffect        1.0 Base/RoundedOutEffect.qml
+AdvancedRectangle       1.0 Base/AdvancedRectangle.qml
+BoxShadow               1.0 Base/BoxShadow.qml
+GradientColor           1.0 Base/GradientColor.qml
+ItemShadow.qml          1.0 Base/ItemShadow.qml
+
+Button                  1.0 Button.qml
+CheckBox                1.0 CheckBox.qml
+Label                   1.0 Label.qml
+ProgressBar             1.0 ProgressBar.qml
+RadioButton             1.0 RadioButton.qml
+RangeSlider             1.0 RangeSlider.qml
+Slider                  1.0 Slider.qml
+SpinBox                 1.0 SpinBox.qml
+Switch                  1.0 Switch.qml
+TextArea                1.0 TextArea.qml
+TextField               1.0 TextField.qml
+Tumbler                 1.0 Tumbler.qml

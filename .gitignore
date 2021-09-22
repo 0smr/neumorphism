@@ -1,3 +1,5 @@
+*.tmp
+
 # style template
 *Pending/*
 
@@ -6,3 +8,4 @@ build*
 
 # qt IDE user settigns
 *.user
+*.autosave
