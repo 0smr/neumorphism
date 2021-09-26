@@ -26,8 +26,8 @@ Item {
     id: control
 
     property alias                          color: effect._color
-    default property list<GradientColor>    gradient
-    default property var                    radius
+    property list<GradientColor>            gradient
+    property var                            radius
 
     ShaderEffect {
         id: effect
@@ -46,15 +46,15 @@ Item {
         readonly property bool      _hasgrd:    gradient.length > 1;
         readonly property vector4d  _vrrad:     {
             let rad;
-            if(typeof rad == "number"){
+            if(typeof control.radius == "number"){
                 rad = Math.min(control.radius, 0.5);
                 return Qt.vector4d(rad,rad,rad,rad);
             }
             else {
                 /*!
-                 *  set radius priority:
-                 *      vector4d(x, y, z, w):
-                 *      rad.y > (rad.x,rad.y) > rad.w
+                 * radius priority:
+                 * - vector4d(x, y, z, w):
+                 * - rad.y > (rad.x,rad.y) > rad.w
                  */
                 rad     = control.radius;
                 rad.x   = Math.min(rad.x, 1-rad.y);
@@ -63,7 +63,6 @@ Item {
                 return rad;
             }
         }
-
 
         function rb(rad) {
             const min   = Math.min(width, height);
