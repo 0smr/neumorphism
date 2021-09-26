@@ -24,8 +24,8 @@ pragma Singleton
 import QtQuick 2.15
 
 QtObject {
-    property color backgroundColor: '#f3e3ff';
-    property color forgoundColor:   '#f3e3ff';
+    property color color:   '#f5f5f5';
+    property color accent:  '#7DC4FF';
 
     function blend(color1, color2, alpha) {
         var color = color1;
