@@ -38,7 +38,7 @@ T.Button {
 
     display: AbstractButton.TextOnly
 
-    palette.buttonText: Qt.darker(Neumorphism.accent, 1.5)
+    palette.buttonText: 'gray'
 
     contentItem: Item {
         Grid {
@@ -65,6 +65,7 @@ T.Button {
                 text:    control.text
                 font:    control.font
                 color:   control.palette.buttonText
+                horizontalAlignment: Text.AlignHCenter
             }
         }
     }
@@ -82,14 +83,14 @@ T.Button {
             border { radius: width; margin: width * 0.1 }
 
             shadow {
-                offset:     control.checked ? 0.78 :
-                            control.down ?    0.74 : 0.82;
+                offset:     control.checked ? 0.80 :
+                            control.down ?    0.78 : 0.85;
                 angle:      45.0; distance:   0.30;
-                radius:     1.00; spread:     0.74;
+                radius:     1.00; spread:     0.78;
             }
 
             Behavior on shadow.offset {
-                NumberAnimation { duration: 50 }
+                NumberAnimation { duration: 100 }
             }
 
             Rectangle {
@@ -101,15 +102,25 @@ T.Button {
                 color: 'transparent'
                 radius: width/2
                 opacity: 0.5
-                border.color: Neumorphism.color
-                border.width: width * 0.02
+                border.color: control.palette.midlight
+                border.width: width * 0.05
             }
 
             RoundedInEffect {
-                width: parent.width - parent.border.margin * 2.2
+                width:  parent.width - parent.border.margin * 2.5
                 height: width
-                visible: control.checked
                 anchors.centerIn: parent
+                color: control.palette.button
+
+                shadow {
+                    radius: 1.00
+                    spread: control.checked? 0.92 : 1.00
+                    offset: 1.0
+                }
+
+                Behavior on shadow.spread {
+                    NumberAnimation{ duration: 100 }
+                }
             }
         }
 }
