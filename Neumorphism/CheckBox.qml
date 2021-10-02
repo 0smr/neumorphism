@@ -33,42 +33,51 @@ T.CheckBox {
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding,
-                             implicitIndicatorHeight + topPadding + bottomPadding)
+                             implicitIndicatorHeight + topPadding + bottomPadding,
+                             indicator.height + topPadding + bottomPadding)
+
+    palette.buttonText: 'gray'
 
     padding: 6
     spacing: 6
 
     indicator: RoundedInEffect {
+        id: indicatorBack
+
         implicitWidth:  28
         implicitHeight: 28
 
         shadow {
-            offset: 0.50
-            radius: 0.30 * shadow.offset * 2.0
-            spread: 0.70
+            offset: 0.8
+            radius: 0.5
+            spread: 0.6
         }
 
         border {
-            radius: width * 0.30
+            radius: width * 0.2
         }
 
-        x: control.text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
+        x: control.text ?
+               (control.mirrored ?
+                    control.width - width - control.rightPadding :
+                    control.leftPadding) :
+               control.leftPadding + (control.availableWidth - width) / 2
+
         y: control.topPadding + (control.availableHeight - height) / 2
 
         color: control.palette.button
-//        color: control.down ? control.palette.light : control.palette.base
-        // border.width: control.visualFocus ? 2 : 1
-        // border.color: control.visualFocus ? control.palette.highlight : control.palette.mid
-
-
-//            visible: control.checkState === Qt.PartiallyChecked
+        /*!
+         * TODO: add active and visual focus effect
+         * control.visualFocus
+         * control.activeFocus
+         */
 
         BoxShadow {
+            id: ishade
             x: (parent.width - width * 0.90) / 2
             y: (parent.height - height * 0.90) / 2
 
             width:  parent.width  * 0.90
-            visible: control.checkState === Qt.Checked
             height: width
             color: '#77000000'
 
@@ -80,23 +89,43 @@ T.CheckBox {
         }
 
         AdvancedRectangle {
+            id: ibox
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
+
             width:  parent.width  * 0.75
             height: width
 
-            visible: control.checkState === Qt.Checked
-
             radius: 0.2
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.2); stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.05); stop: Qt.vector2d(1,1)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.2);   stop: Qt.vector2d(0,0)},
+                GradientColor{color: Qt.darker (control.palette.button, 1.05);  stop: Qt.vector2d(1,1)}
             ]
-
-            Behavior on width {
-                NumberAnimation { duration: 50 }
-            }
         }
+
+        /*!
+         * TODO: write a cleaner code.
+         */
+        states:[
+            State {
+                when: control.checkState === Qt.Unchecked
+                PropertyChanges { target: ishade; width: 0;} // It also make height = 0
+                PropertyChanges { target: ibox;   width: 0;}
+            },
+            State {
+                when: control.checkState === Qt.PartiallyChecked
+                PropertyChanges { target: ishade; height: control.indicator.height * 0.4}
+                PropertyChanges { target: ibox;   height: control.indicator.height * 0.2}
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from:   "*"
+                to:     "*"
+                NumberAnimation { properties: "width, height"; duration: 100 }
+            }
+        ]
     }
 
     contentItem: Text {
@@ -105,6 +134,6 @@ T.CheckBox {
         verticalAlignment: Text.AlignVCenter
         text:           control.text
         font:           control.font
-        color:          control.palette.windowText
+        color:          control.palette.buttonText
     }
 }
