@@ -83,10 +83,10 @@ T.Button {
             border { radius: width; margin: width * 0.1 }
 
             shadow {
-                offset:     control.checked ? 0.80 :
-                            control.down ?    0.78 : 0.85;
-                angle:      45.0; distance:   0.30;
-                radius:     1.00; spread:     0.78;
+                offset:     control.checked ? 0.77 :
+                            control.down ?    0.74 : 0.79;
+                angle:      45.0; distance:   0.40;
+                radius:     1.00; spread:     0.56;
             }
 
             Behavior on shadow.offset {
@@ -107,9 +107,11 @@ T.Button {
             }
 
             RoundedInEffect {
+                x: parent.border.margin * 1.25
+                y: x
+
                 width:  parent.width - parent.border.margin * 2.5
                 height: width
-                anchors.centerIn: parent
                 color: control.palette.button
 
                 shadow {
