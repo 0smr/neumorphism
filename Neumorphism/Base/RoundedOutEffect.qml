@@ -46,8 +46,8 @@ Item {
                 distance: 0.4
                 radius:   0.8
                 spread:   0.7
-                color1:   Qt.lighter(control.color, 1.30);
-                color2:   Qt.darker (control.color, 1.15);
+                color1:   Qt.lighter(control.color, 1.40);
+                color2:   Qt.darker (control.color, 1.25);
             }
 
         property Border border: Border {
@@ -57,13 +57,16 @@ Item {
 
         property color _color: control.color;
 
-        readonly property real _shradius: Math.min(shadow.radius, _offset)
+        readonly property real _shradius: {
+            const min = Math.min(_width, _height);
+            return Math.max(Math.min(shadow.radius, min + _offset*2), 0.0);// radius must be greater than zero
+        }
         readonly property color color1: shadow.color1;
         readonly property color color2: shadow.color2;
-        readonly property real _spread: shadow.spread * 0.99999 - 0.5
+        readonly property real _spread: shadow.spread * 0.499999;
         readonly property real _width:  width / Math.max(width, height)
         readonly property real _height: height / Math.max(width, height)
-        readonly property real _offset: shadow.offset
+        readonly property real _offset: shadow.offset/2 - 0.5;
         readonly property real _angle:  shadow.angle
         readonly property real _shdiff: shadow.distance
         readonly property real _margin: border.margin / Math.max(width, height);
@@ -73,6 +76,7 @@ Item {
         }
 
         fragmentShader: "
+            #version 330
             uniform highp   float   qt_Opacity;
             varying highp   vec2    qt_TexCoord0;
             uniform mediump float   _shradius;
@@ -93,19 +97,20 @@ Item {
             }
 
             void main() {
-                // ---------------- normalized size and coordinate ----------------
-                highp vec2  size = vec2(_width,_height)/2.0;
-                highp vec2 coord = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
+                // ---------------- normalized center and coordinate ----------------
+                highp vec2 center = vec2(_width, _height)/2.0;
+                highp vec2 coord  = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
+                highp vec2 offset = center + _offset + _shradius / 2.0;
 
-                // ----------------- inner shadow spread and size -----------------
+                // -------------------- shadow spread and offset ---------------------
                 lowp float shadowAlpha =
-                    smoothstep(0.0, _shradius, _offset * _width  - abs(size.x - coord.x)) *
-                    smoothstep(0.0, _shradius, _offset * _height - abs(size.y - coord.y));
+                    smoothstep(0.0, _shradius, offset.x - abs(center.x - coord.x)) *
+                    smoothstep(0.0, _shradius, offset.y - abs(center.y - coord.y));
 
                 highp float spreadMulti     = linearstep(_spread, 1.0 - _spread, shadowAlpha);
-                highp float alpha           = qt_Opacity * spreadMulti * spreadMulti;
+                highp float alpha           = qt_Opacity * spreadMulti;
 
-                // ---------------- color 1 and color 2 divisiveness ----------------
+                // ---------------- color 1 and color 2 divisiveness -----------------
                 lowp float a                = tan(_angle * 0.01745);
                 lowp float x0               = a * (qt_TexCoord0.x - 0.5) - 0.5;
                 lowp float line             = abs(x0 + qt_TexCoord0.y);
@@ -119,8 +124,8 @@ Item {
                 }
 
                 // ------------------ plate size and border radius ------------------
-                size -= _margin; coord -= _margin;
-                highp float distance 		= length(max(abs(coord - size) - size + _radius, 0.0)) - _radius;
+                center -= _margin; coord -= _margin;
+                highp float distance 		= length(max(abs(coord - center) - center + _radius, 0.0)) - _radius;
                 highp float smoothedAlpha   = smoothstep(0.0, 0.0, distance);
                 gl_FragColor                = mix(_color, gl_FragColor, smoothedAlpha);
             }"

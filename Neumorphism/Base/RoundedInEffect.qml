@@ -46,22 +46,25 @@ Item {
             }
 
         property Shadow shadow: Shadow {
-                offset: 1.0
+                offset: 0.98
+                radius: 0.50
+                spread: 0.50
                 angle:  45
                 distance: 0.45
-                radius: 1.0
-                spread: 0.84
                 color1: Qt.darker (control.color, 1.15);
                 color2: Qt.lighter(control.color, 1.20);
             }
 
-        readonly property real _shradius: Math.min(shadow.radius, _offset)
+        readonly property real _shradius: {
+            const min = Math.min(_width, _height);
+            return Math.max(Math.min(shadow.radius, min + _offset*2), 0.0);// radius must be greater than zero
+        }
         readonly property color color1: shadow.color1
         readonly property color color2: shadow.color2
         readonly property real _spread: shadow.spread * 0.99999 - 0.5
-        readonly property real _width:  width / Math.max(width, height)
+        readonly property real _width:  width  / Math.max(width, height)
         readonly property real _height: height / Math.max(width, height)
-        readonly property real _offset: shadow.offset
+        readonly property real _offset: shadow.offset/2 - 0.5
         readonly property real _angle:  shadow.angle
         readonly property real _shdiff: shadow.distance
         readonly property real _radius: {
@@ -70,6 +73,7 @@ Item {
         }
 
         fragmentShader: "
+            #version 330
             uniform highp   float   qt_Opacity;
             varying highp   vec2    qt_TexCoord0;
             uniform mediump float   _shradius;
@@ -88,17 +92,18 @@ Item {
             }
 
             void main() {
-                // ---------------- normalized size and coordinate ----------------
-                highp vec2  size = vec2(_width,_height)/2.0;
-                highp vec2 coord = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
+                // ---------------- normalized center and coordinate ----------------
+                highp vec2 center = vec2(_width, _height)/2.0;
+                highp vec2 coord  = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
+                highp vec2 offset = center + _offset + _shradius / 2.0;
 
-                // ----------------- inner shadow spread and size -----------------
+                // ----------------- inner shadow spread and offset -----------------
                 lowp float shadowAlpha =
-                    smoothstep(0.0, _shradius, _offset * _width  - abs(size.x - coord.x)) *
-                    smoothstep(0.0, _shradius, _offset * _height - abs(size.y - coord.y));
+                    smoothstep(0.0, _shradius, offset.x - abs(center.x - coord.x)) *
+                    smoothstep(0.0, _shradius, offset.y - abs(center.y - coord.y));
 
                 highp float spreadMulti     = 1.0 - linearstep(_spread, 1.0 - _spread, shadowAlpha);
-                highp float alpha           = qt_Opacity * spreadMulti * spreadMulti;
+                highp float alpha           = qt_Opacity * spreadMulti;
 
                 // ---------------- color 1 and color 2 divisiveness ----------------
                 lowp float a                = tan(_angle * 0.01745);
@@ -114,8 +119,8 @@ Item {
                 }
 
                 // ---------------------- border radius clip ----------------------
-                highp float distance 		= length(max(abs(coord - size) - size + _radius, 0.0)) - _radius;
-                gl_FragColor                *= smoothstep(0.0, 0.001, 0.01 - min(0.1, distance));
+                highp float distance 		= length(max(abs(coord - center) - center + _radius, 0.0)) - _radius;
+                gl_FragColor                *= smoothstep(0.0, 0.0, 0.001 - distance);
             }"
     }
 }
