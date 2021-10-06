@@ -35,7 +35,8 @@ T.CheckBox {
                              implicitContentHeight + topPadding + bottomPadding,
                              implicitIndicatorHeight + topPadding + bottomPadding,
                              indicator.height + topPadding + bottomPadding)
-
+    property alias shade: ishade.shadow
+    property point xy
     palette.buttonText: 'gray'
 
     padding: 6
@@ -74,32 +75,32 @@ T.CheckBox {
 
         BoxShadow {
             id: ishade
-            x: (parent.width - width * 0.90) / 2
-            y: (parent.height - height * 0.90) / 2
+            x: ibox.x * 0.88
+            y: ibox.y * 0.88
 
-            width:  parent.width  * 0.90
-            height: width
-            color: '#77000000'
+            width:  ibox.width * 1.24
+            height: ibox.height* 1.24
+            color: '#21000000'
 
             shadow {
-                radius: 0.45
-                offset: 0.60
-                spread: 0.40
+                radius: 0.37
+                offset: 0.74
+                spread: 0.10
             }
         }
 
         AdvancedRectangle {
             id: ibox
-            x: (parent.width - width) / 2
+            x: (parent.width  - width) / 2
             y: (parent.height - height) / 2
 
             width:  parent.width  * 0.75
             height: width
 
-            radius: 0.2
+            radius: 0.20
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.2);   stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.05);  stop: Qt.vector2d(1,1)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.1);  stop: Qt.vector2d(0.0,0.0)},
+                GradientColor{color: Qt.darker (control.palette.button, 1.02);  stop: Qt.vector2d(0.6,0.6)}
             ]
         }
 
@@ -114,8 +115,8 @@ T.CheckBox {
             },
             State {
                 when: control.checkState === Qt.PartiallyChecked
-                PropertyChanges { target: ishade; height: control.indicator.height * 0.4}
-                PropertyChanges { target: ibox;   height: control.indicator.height * 0.2}
+                PropertyChanges { target: ishade; height: control.indicator.height * 0.40}
+                PropertyChanges { target: ibox;   height: control.indicator.height * 0.20}
             }
         ]
 

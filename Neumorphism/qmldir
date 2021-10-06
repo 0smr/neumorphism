@@ -12,6 +12,7 @@ RoundedInEffect         1.0 Base/RoundedInEffect.qml
 RoundedOutEffect        1.0 Base/RoundedOutEffect.qml
 AdvancedRectangle       1.0 Base/AdvancedRectangle.qml
 BoxShadow               1.0 Base/BoxShadow.qml
+CBoxShadow              1.0 Base/CBoxShadow.qml
 GradientColor           1.0 Base/GradientColor.qml
 ItemShadow.qml          1.0 Base/ItemShadow.qml
 
