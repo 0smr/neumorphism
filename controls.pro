@@ -2,7 +2,7 @@ TEMPLATE    = subdirs
 SUBDIRS     = \
         Neumorphism \
         Tests       \
-        #Examples
+        # Examples
 
 Tests.depends    = Neumorphism
-#Examples.depends = Neumorphism
+# Examples.depends = Neumorphism
