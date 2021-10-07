@@ -10,8 +10,11 @@ For drop shadows, I used *ShaderEffect*, so there may be a couple of algorithmic
 [Medium](https://artofofiare.medium.com/neumorphism-the-right-way-a-2020-design-trend-386e6a09040a)
 > Neumorphism (or Neo-skeuomorphism) is a modern iteration of a style of designing web elements, frames, screens, etc. known as [Skeuomorphism](https://medium.muz.li/skeuomorphic-design-a-controversial-ux-approach-that-is-making-a-comeback-a0b6e93eb4bb).
 
+## How to use
+no document provided yet.
+
 ## Documentation
-There is no documentation provided yet.
+no document provided yet.
 
 ## Components
 <details open>
@@ -20,42 +23,50 @@ There is no documentation provided yet.
 - [x] Button
 - [x] Radio Button
 - [x] CheckBox
-- [x] AdvancedRectangle <br>
+- [x] AdvancedRectangle
+- [x] Slider
+- [x] TextArea
+- [x] TextField 
+- [x] ProgressBar
+- [x] RadioButton
+- [x] Switch
 
 </details>
 
 <details>
 <summary> Pending</summary>
 
-- [ ] Button
-- [ ] CheckBox
-- [ ] Label
-- [ ] ProgressBar
-- [ ] RadioButton
 - [ ] RangeSlider
-- [ ] Slider
+- [ ] MultiRangeSlider
 - [ ] SpinBox
-- [ ] Switch
-- [ ] TextArea
-- [ ] TextField
 - [ ] Tumbler
+- [ ] Dial
+- [ ] BusyIndicator
+- [ ] StackView
+- [ ] SweepView
+- [ ] SplitView
+- [ ] CircularProgressBar
+- [ ] VerticalSeparator
+- [ ] HorizontalSeparator
+- [ ] GooeyEffect
+- [ ] MultiPointGradient
 
 </details>
 
 ---
 
 ## Preview
-There are no previews provided yet.
+no document provided yet.
 
 ---
 
 ## 3rd-Parties
 &emsp;  <a href="https://download.qt.io/archive/qt/5.15/">
-    <img src="https://img.shields.io/badge/Qt-v5.15.2 -41CD52?logo=Qt&logoColor=41CD52">
+    <img src="https://img.shields.io/badge/Qt-v5.15.2-41CD52?logo=Qt&logoColor=41CD52">
 </a>
 <a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/">
     <img src="https://img.shields.io/badge/GLSL
--v3.3 -5586A4?logo=OpenGL&logoColor=">
+-v3.3-5586A4?logo=OpenGL&logoColor=5586A4">
 </a>
 
 ## Donation
