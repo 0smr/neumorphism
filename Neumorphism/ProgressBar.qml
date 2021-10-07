@@ -59,7 +59,7 @@ T.ProgressBar {
          * }
          */
         QGE10.RectangularGlow {
-            x: ibox.x * 1.7
+            x: ibox.x * 1.8
             y: ibox.y * 3.0
 
             width:  ibox.width  - x * 0.8
@@ -68,6 +68,7 @@ T.ProgressBar {
             color: '#77000000'
             spread: 0.0
             glowRadius: 4
+            visible: control.position > 0.001
         }
 
         AdvancedRectangle {

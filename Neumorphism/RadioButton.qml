@@ -71,10 +71,11 @@ T.RadioButton {
 
         BoxShadow {
             id: ishade
-            x: parent.width  * 0.05
-            y: parent.width  * 0.05
+            x: ibox.x  * 1.1
+            y: ibox.y  * 1.1
 
             width:  control.checked ? parent.width  * 0.90 : 0
+            opacity: control.checked ? 1.0 : 0.0
             height: width
             color: '#77000000'
 
@@ -84,13 +85,14 @@ T.RadioButton {
                 spread: 0.15
             }
 
-            Behavior on width {NumberAnimation{ duration: 100 }}
+            Behavior on width   {NumberAnimation{ duration: 100 }}
+            Behavior on opacity {NumberAnimation{ duration: 100 }}
         }
 
         AdvancedRectangle {
             id: ibox
-            x: parent.width  * 0.125
-            y: parent.width  * 0.125
+            x: (parent.width  - width)/2
+            y: x
 
             width:  control.checked ? parent.width  * 0.75 : 0
             height: width

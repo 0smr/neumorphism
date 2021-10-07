@@ -99,8 +99,8 @@ T.CheckBox {
 
             radius: 0.20
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.1);  stop: Qt.vector2d(0.0,0.0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.02);  stop: Qt.vector2d(0.6,0.6)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.2);  stop: Qt.vector2d(0.0,0.0)},
+                GradientColor{color: Qt.darker (control.palette.button, 1.02);  stop: Qt.vector2d(1.0,1.0)}
             ]
         }
 
