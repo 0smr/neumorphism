@@ -83,10 +83,14 @@ T.Button {
             border { radius: width; margin: width * 0.1 }
 
             shadow {
-                offset:     control.checked ? 0.77 :
-                            control.down ?    0.74 : 0.79;
-                angle:      45.0; distance:   0.40;
-                radius:     1.00; spread:     0.56;
+                radius:     1.00;
+                offset:     control.down ? 0.68 :
+                            control.checked ? 0.72 : 0.75;
+                spread:     !control.enabled ? 0.70: 0.48;
+                distance:   0.40;
+                angle:      45.0;
+                color1:     Qt.lighter(background.color, 1.30);
+                color2:     Qt.darker (background.color, 1.20);
             }
 
             Behavior on shadow.offset {
@@ -102,7 +106,7 @@ T.Button {
                 color: 'transparent'
                 radius: width/2
                 opacity: 0.5
-                border.color: control.palette.midlight
+                border.color: Qt.tint(control.palette.highlight, "#12ffffff")
                 border.width: width * 0.05
             }
 
