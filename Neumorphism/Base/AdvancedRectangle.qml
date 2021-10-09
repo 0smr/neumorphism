@@ -27,7 +27,7 @@ Item {
 
     property color                  color: '#aaa'
     property list<GradientColor>    gradient
-    property var                    radius: undifined
+    property var                    radius: undefined
 
     ShaderEffect {
         id: effect

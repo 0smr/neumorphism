@@ -65,8 +65,7 @@ no document provided yet.
     <img src="https://img.shields.io/badge/Qt-v5.15.2-41CD52?logo=Qt&logoColor=41CD52">
 </a>
 <a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/">
-    <img src="https://img.shields.io/badge/GLSL
--v3.3-5586A4?logo=OpenGL&logoColor=5586A4">
+    <img src="https://img.shields.io/badge/GLSL-v3.3-5586A4?logo=OpenGL&logoColor=5586A4">
 </a>
 
 ## Donation
