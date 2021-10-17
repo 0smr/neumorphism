@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    engine.addImportPath("C:/Users/seyye/Desktop/active projects/qml-neumorphism");
+    // Path to module componnents
+    engine.addImportPath(QCoreApplication::applicationDirPath () +
+                         "/../../../../qml-neumorphism");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
