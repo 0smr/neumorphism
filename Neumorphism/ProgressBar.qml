@@ -22,8 +22,7 @@
 
 
 import QtQuick 2.15
-import QtQuick.Templates 2.15 as T
-import QtGraphicalEffects 1.0 as QGE10
+import QtQuick.Templates 2.15  as T
 
 // @disable-check M129
 T.ProgressBar {
@@ -32,52 +31,42 @@ T.ProgressBar {
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                            implicitContentHeight + topPadding + bottomPadding)
+                             implicitContentHeight + topPadding + bottomPadding)
+
+    property int orientation: Qt.Horizontal
+    padding: 5
+
+    QtObject {
+        id: vars
+        property bool vertical:     control.orientation == Qt.Vertical
+        property bool horizontal:   control.orientation == Qt.Horizontal
+    }
 
     contentItem: Item {
-        implicitWidth:  200
+        implicitWidth:  background.implicitWidth
         implicitHeight: background.implicitHeight
 
-        /*!
-         * FIXME: my custom box shadow doesn't working fine here.
-         * width changes effect height too.
-         *
-         * BoxShadow {
-         *     id: ishade
-         *     x: ibox.x
-         *     y: ibox.y
-         *
-         *     width:  ibox.width  * 1.0
-         *     height: ibox.height * 1.5
-         *     color:  '#77000000'
-         *
-         *     shadow {
-         *         radius: 1.0
-         *         offset: 0.70
-         *         spread: 0.20
-         *     }
-         * }
-         */
-        QGE10.RectangularGlow {
-            x: ibox.x * 1.8
-            y: ibox.y * 3.0
+        BoxShadow {
+            id: ishade
+            anchors.bottom: ibox.bottom
+            anchors.left:   ibox.left
+            anchors.bottomMargin: -5
 
-            width:  ibox.width  - x * 0.8
-            height: ibox.height * 0.2
+            width:  ibox.width  * (vars.horizontal ? control.position : 1) + control.padding
+            height: ibox.height * (vars.vertical   ? control.position : 1) + control.padding
+            color:  '#77000000'
 
-            color: '#77000000'
-            spread: 0.0
-            glowRadius: 4
-            visible: control.position > 0.001
+            shadow {
+                radius: 1.00
+                spread: 0.30 * 50
+            }
         }
 
         AdvancedRectangle {
             id: ibox
-            x: parent.height * 0.20
-            y: x
 
-            width:  (parent.width - 2.0 * y) * control.position
-            height: parent.height - 2.0 * y
+            width:  parent.width
+            height: parent.height
 
             /**
              * TODO: add indeterminate mode.
@@ -87,35 +76,53 @@ T.ProgressBar {
              * indeterminate: control.visible && control.indeterminate
              */
 
-            radius: {
-                let tailRad = Math.max(0.5 - width * (1.0 - control.position), 0.0);
-                return Qt.vector4d(1.0 ,1.0 ,tailRad ,tailRad);
-            }
+            radius:     1.0;
+            visible:    false
 
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.20); stop: Qt.vector2d(0.5,0.1)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.05); stop: Qt.vector2d(0.5,0.9)}
+                GradientColor{
+                    color: Qt.lighter(control.palette.button, 1.20);
+                    stop: vars.vertical ? Qt.vector2d(-.1,0.5) : Qt.vector2d(0.5,0.1)
+                },
+                GradientColor{
+                    color: Qt.darker (control.palette.button, 1.05);
+                    stop: vars.vertical ? Qt.vector2d(1.1,0.5) : Qt.vector2d(0.5,0.9)
+                }
             ]
+        }
+
+        ShaderEffectSource {
+            id: iboxClip
+            x: 0;
+            y: vars.vertical   ? clipHeight: 0
+
+            width:  ibox.width - clipWidth;
+            height: ibox.height
+
+            property real clipHeight: vars.vertical   ? ibox.height * (1.0 - control.position) : 0
+            property real clipWidth:  vars.horizontal ? ibox.width  * (1.0 - control.position) : 0
+
+            sourceItem: ibox
+            sourceRect: vars.horizontal ? Qt.rect(0, 0, width, height) :
+                                          Qt.rect(0, clipHeight, width, height)
         }
     }
 
     background: RoundedInEffect {
-        y: (control.height - height) / 2
-
-        implicitWidth:  200
-        implicitHeight: 16
+        implicitWidth:  vars.vertical? 18 : 200
+        implicitHeight: vars.vertical? 200 : 16
 
         color: control.palette.button
 
         shadow {
             offset: 1.00
             radius: 1.00
-            spread: 0.40
-            angle:  0.00
+            spread: vars.vertical ? 0.45 : 0.40
+            angle:  vars.vertical ? 90.0 : 0.00
         }
 
         border {
-            radius: width * 0.5
+            radius: width
         }
     }
 }
