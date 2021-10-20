@@ -69,17 +69,16 @@ T.Switch {
 
         BoxShadow {
             id: ishade
-            x: ibox.x - width * 0.05
-            y: ibox.y - width * 0.05
+            x: ibox.x - width * 0.1
+            y: ibox.y - width * 0.1
 
-            width:  ibox.width * 1.3
+            width:  ibox.width * 1.42
             height: width
-            color: '#77000000'
+            color: '#000'
 
             shadow {
                 radius: 1.00
-                offset: 0.60
-                spread: 0.05
+                spread: 0.55 * 50
             }
         }
 

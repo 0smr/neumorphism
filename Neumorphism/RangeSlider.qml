@@ -23,6 +23,7 @@
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
+import QtQuick.Controls  2.15 as QQC
 
 // @disable-check M129
 T.RangeSlider {
@@ -38,7 +39,7 @@ T.RangeSlider {
     padding: 6
 
     /**
-     * FIXME: there are no active focus on click for handles.
+     * FIXME: there are no active mouse focus for handles.
      * TODO: move handles to seprate componnent.
      */
 
@@ -46,36 +47,34 @@ T.RangeSlider {
         x: control.leftPadding + (control.horizontal ? control.first.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
         y: control.topPadding + (control.horizontal ? (control.availableHeight - height) / 2 : control.first.visualPosition * (control.availableHeight - height))
 
-        implicitWidth:   20
-        implicitHeight:  20
+        implicitWidth:  20
+        implicitHeight: 20
 
         width:  implicitWidth * (visualFocus ? 1.0 : 0.8)
         height: width
-        focusPolicy: Qt.StrongFocus
 
         Behavior on width { NumberAnimation{ duration: 200} }
 
         BoxShadow {
-            id: ishade
-            x: - width  * 0.05
+            x: -width * 0.1
             y: x
 
-            width:  ibox.width * 1.36
-            height: width
+            property real offset: control.height * (first.pressed ? 0.30 : 0.25)
 
-            color: '#44000000'
+            width:  ibox2.width + offset
+            height: width
+            color: '#99000000'
             shadow {
                 radius: 1.00
-                offset: control.first.pressed  ? 0.64: 0.54
-                spread: 0.05
+                spread: 0.50 * 50
             }
 
-            Behavior on shadow.offset { NumberAnimation{ duration: 100} }
+            Behavior on offset { NumberAnimation{ duration: 100} }
         }
 
         AdvancedRectangle {
             id: ibox
-            width: parent.width
+            width:  parent.width
             height: parent.height
 
             radius: 0.5
@@ -89,31 +88,31 @@ T.RangeSlider {
 
     second.handle: T.Control {
         x: control.leftPadding + (control.horizontal ? control.second.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
-        y: control.topPadding + (control.horizontal ? (control.availableHeight - height) / 2 : control.second.visualPosition * (control.availableHeight - height))
+        y: control.topPadding  + (control.horizontal ? (control.availableHeight - height) / 2 : control.second.visualPosition * (control.availableHeight - height))
 
         implicitWidth:   20
         implicitHeight:  20
 
-        width:  implicitWidth * (ibox2.visualFocus ? 1.0 : 0.8)
+        width:  implicitWidth * (visualFocus ? 1.0 : 0.8)
         height: width
 
         Behavior on width { NumberAnimation{ duration: 200} }
 
         BoxShadow {
-            x: - width  * 0.05
+            x: -width * 0.1
             y: x
 
-            width:  ibox2.width * 1.36
-            height: width
+            property real offset: control.height * (second.pressed ? 0.30 : 0.25)
 
-            color: '#44000000'
+            width:  ibox2.width + offset
+            height: width
+            color: '#99000000'
             shadow {
                 radius: 1.00
-                offset: control.second.pressed ? 0.64: 0.54
-                spread: 0.05
+                spread: 0.50 * 50
             }
 
-            Behavior on shadow.offset { NumberAnimation{ duration: 100} }
+            Behavior on offset { NumberAnimation{ duration: 100} }
         }
 
         AdvancedRectangle {
@@ -150,7 +149,7 @@ T.RangeSlider {
             radius: 1.00
             offset: 0.99
             spread: 0.40
-            angle:  control.horizontal  ? 0.00 : 90.0
+            angle:  control.horizontal ? 0.00 : 90.0
         }
 
         border { radius: width }

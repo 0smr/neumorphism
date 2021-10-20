@@ -36,7 +36,7 @@ T.Slider {
 
     handle: Item {
         x: control.leftPadding + (control.horizontal ? control.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
-        y: control.topPadding + (control.horizontal ? (control.availableHeight - height) / 2 : control.visualPosition * (control.availableHeight - height))
+        y: control.topPadding  + (control.horizontal ? (control.availableHeight - height) / 2 : control.visualPosition * (control.availableHeight - height))
 
         implicitWidth:   20
         implicitHeight:  20
@@ -44,29 +44,30 @@ T.Slider {
         width:  implicitWidth * (control.activeFocus ? 1.0 : 0.8)
         height: width
 
-        Behavior on width { NumberAnimation{ duration: 200} }
+        Behavior on width { NumberAnimation{ duration: 100} }
 
         BoxShadow {
             id: ishade
-            x: - width  * 0.05
+            x: -width * 0.1
             y: x
 
-            width:  ibox.width * 1.36
+            property real offset: control.height * (control.pressed ? 0.30 : 0.25)
+
+            width:  ibox.width + offset
             height: width
 
-            color: '#44000000'
+            color: '#99000000'
             shadow {
                 radius: 1.00
-                offset: control.pressed ? 0.64: 0.54
-                spread: 0.05
+                spread: 0.50 * 50
             }
 
-            Behavior on shadow.offset { NumberAnimation{ duration: 100} }
+            Behavior on offset { NumberAnimation{ duration: 100} }
         }
 
         AdvancedRectangle {
             id: ibox
-            width: parent.width
+            width:  parent.width
             height: parent.height
 
             radius: 0.5
@@ -79,8 +80,8 @@ T.Slider {
     }
 
     background: RoundedInEffect {
-        x: (control.width   - width) / 2
-        y: (control.height  - height) / 2
+        x: (control.width  - width) / 2
+        y: (control.height - height) / 2
 
         implicitWidth:  control.horizontal ? 200 : 10
         implicitHeight: control.horizontal ? 10 : 200

@@ -75,17 +75,16 @@ T.CheckBox {
 
         BoxShadow {
             id: ishade
-            x: ibox.x * 0.88
-            y: ibox.y * 0.88
+            x: ibox.x - 2
+            y: ibox.y - 2
 
-            width:  ibox.width * 1.24
-            height: ibox.height* 1.24
-            color: '#21000000'
+            width:  ibox.width * 1.3
+            height: ibox.height* 1.3
+            color: '#44000000'
 
             shadow {
-                radius: 0.37
-                offset: 0.74
-                spread: 0.10
+                radius: 0.00
+                spread: 0.20 * 50
             }
         }
 

@@ -71,18 +71,18 @@ T.RadioButton {
 
         BoxShadow {
             id: ishade
-            x: ibox.x  * 1.1
-            y: ibox.y  * 1.1
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset:   control.padding/4
+            anchors.horizontalCenterOffset: control.padding/4
 
-            width:  control.checked ? parent.width  * 0.90 : 0
-            opacity: control.checked ? 1.0 : 0.0
+            width:  control.checked ? ibox.width * 1.4 : 0
             height: width
+            opacity: control.checked ? 1.0 : 0.0
             color: '#77000000'
 
             shadow {
                 radius: 1.00
-                offset: 0.66
-                spread: 0.15
+                spread: 0.30 * 50
             }
 
             Behavior on width   {NumberAnimation{ duration: 100 }}
