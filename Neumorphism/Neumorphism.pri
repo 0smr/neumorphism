@@ -3,7 +3,6 @@ QML_FILES += \
     $$PWD/Base/AdvancedRectangle.qml \
     $$PWD/Base/Border.qml \
     $$PWD/Base/BoxShadow.qml \
-    $$PWD/Base/CBoxShadow.qml \
     $$PWD/Base/GradientColor.qml \
     $$PWD/Base/ItemShadow.qml \
     $$PWD/Base/RoundedInEffect.qml \
@@ -23,8 +22,6 @@ QML_FILES += \
     $$PWD/TextField.qml \
     $$PWD/Tumbler.qml
 
-DISTFILES += \
-    $$PWD/Base/CBoxShadow.qml
 
 
 
