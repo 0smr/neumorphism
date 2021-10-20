@@ -25,6 +25,9 @@ import QtQuick 2.15
 Item {
     id: control
 
+    implicitWidth:  50
+    implicitHeight: 50
+
     property color color: '#000'
     property alias shadow: effect.shadow
 
@@ -42,13 +45,12 @@ Item {
 
         readonly property real _shradius: {
             const min = Math.min(_width, _height);
-            return Math.max(Math.min(shadow.radius, min + _offset*2), 0.0);// radius must be greater than zero
+            return Math.min(Math.max(shadow.radius/2, _spread), min/2);
         }
 
         readonly property real  _width:  width  / Math.max(width, height);
         readonly property real  _height: height / Math.max(width, height);
-        readonly property real  _spread: shadow.spread * 0.499999;
-        readonly property real  _offset: shadow.offset/2 - 0.5;
+        readonly property real  _spread: shadow.spread / Math.max(width, height);
         readonly property color _color:  control.color;
 
         fragmentShader: "
@@ -59,27 +61,17 @@ Item {
             uniform mediump float   _height;
             uniform mediump float   _shradius;
             uniform mediump float   _spread;
-            uniform mediump float   _offset;
             uniform lowp    vec4    _color;
-
-            highp float linearstep(in highp float e0, in highp float e1, in highp float x) {
-                return clamp((x - e0) / (e1 - e0), 0.0, 1.0);
-            }
 
             void main() {
                 // ---------------- normalized center and coordinate ----------------
-                highp vec2 center = vec2(_width, _height)/2.0;
+                highp vec2 center = vec2(_width, _height) / 2.0;
                 highp vec2 coord  = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
-                highp vec2 offset = center + _offset + _shradius / 2.0;
-
-                // ----------------- shadow spread and offset -----------------
-                lowp float shadowAlpha =
-                    smoothstep(0.0, _shradius, offset.x - abs(center.x - coord.x)) *
-                    smoothstep(0.0, _shradius, offset.y - abs(center.y - coord.y));
-
-                highp float spreadMulti     = linearstep(_spread, 1.0 - _spread, shadowAlpha);
-                highp float alpha           = qt_Opacity * spreadMulti * spreadMulti;
-                gl_FragColor                = _color * alpha;
+                // ------------------------- color assignment -----------------------
+                gl_FragColor      = _color ;
+                // ---------------------- shadow spread and radius ------------------
+                highp float _dist = length(max(abs(center - coord) - center + _shradius, 0.0)) - _shradius;
+                gl_FragColor      = gl_FragColor * smoothstep(0.0, _spread, - _dist + 0.001) * qt_Opacity;
             }"
     }
 }
