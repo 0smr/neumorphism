@@ -51,6 +51,7 @@ T.ProgressBar {
             anchors.bottom: ibox.bottom
             anchors.left:   ibox.left
             anchors.bottomMargin: -5
+            visible:        control.position > 0.01
 
             width:  ibox.width  * (vars.horizontal ? control.position : 1) + control.padding
             height: ibox.height * (vars.vertical   ? control.position : 1) + control.padding
