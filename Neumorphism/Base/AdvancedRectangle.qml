@@ -34,17 +34,17 @@ Item {
         width:  control.width;
         height: control.height;
 
-        readonly property color      _color:    control.color
-        readonly property color      _c0:       _hasgrd ? gradient[0].color: "#fff";
-        readonly property color      _c1:       _hasgrd ? gradient[1].color: "#fff";
-        readonly property vector2d   _s0:       _hasgrd ? gradient[0].stop : Qt.vector2d(0,0);
-        readonly property vector2d   _s1:       _hasgrd ? gradient[1].stop : Qt.vector2d(0,0);
+        readonly property color _color: control.color
+        readonly property color _c0: _hasgrd ? gradient[0].color: "#fff";
+        readonly property color _c1: _hasgrd ? gradient[1].color: "#fff";
+        readonly property vector2d _s0: _hasgrd ? gradient[0].stop : Qt.vector2d(0,0);
+        readonly property vector2d _s1: _hasgrd ? gradient[1].stop : Qt.vector2d(0,0);
 
-        readonly property real      _width:     width  / Math.max(width, height);
-        readonly property real      _height:    height / Math.max(width, height);
+        readonly property real _width: width / Math.max(width, height);
+        readonly property real _height: height / Math.max(width, height);
 
-        readonly property bool      _hasgrd:    gradient.length > 1;
-        readonly property vector4d  _vrrad:     {
+        readonly property bool _hasgrd: gradient.length > 1;
+        readonly property vector4d _vrrad: {
             let whMin = Math.min(_width,_height)/2;
             if(typeof control.radius == "number"){
                 let rad = 0;
@@ -56,19 +56,19 @@ Item {
                  * radius points,  0 <= x,y,z,w <= 0.5
                  * - vector4d(x, y, z, w):
                  *  ╭───┬───╮
-                 *  │ Y │ Z │
+                 *  │ X │ Y │
                  *  ├───┼───┤
-                 *  │ X │ W │
+                 *  │ W │ Z │
                  *  ╰───┴───╯
-                 *  ┌┐ ╭┐ ┌╮ ┌┐
-                 *  ╰┘ └┘ └┘ └╯
+                 *  ╭┐ ┌╮ ┌┐ ┌┐
+                 *  └┘ └┘ └╯ ╰┘
                  *   X  Y  Z  W
                  */
                 return Qt.vector4d(
                             Math.min(control.radius.x, whMin),
-                            Math.min(control.radius.y, whMin),
                             Math.min(control.radius.z, whMin),
                             Math.min(control.radius.w, whMin),
+                            Math.min(control.radius.y, whMin),
                         );
             }
             else {
@@ -111,21 +111,21 @@ Item {
 
                 // ------------------------ color gradient ------------------------
                 if(_hasgrd) {
-                    lowp float _d               = distance(s0,s1);
-                    lowp float angle            = (s0.x - s1.x)/((s1.y - s0.y) == 0.0 ? 0.001 : s1.y - s0.y);
-                    lowp float line             = angle * (coord.x - (s0.x+s1.x) / 2 ) + (s0.y + s1.y) / 2 - coord.y;
-                    lowp float dist             = line / sqrt(angle * angle + 1.0);
-                    lowp float rotflag          = (s0.y > s1.y) ? -1.0 : 1.0;
-                    gl_FragColor                = mix(_c1, _c0, smoothstep(0.0, 2 * _d, rotflag * dist + _d));
+                    lowp float _d = distance(s0,s1);
+                    lowp float angle = (s0.x - s1.x)/((s1.y - s0.y) == 0.0 ? 0.001 : s1.y - s0.y);
+                    lowp float line = angle * (coord.x - (s0.x+s1.x) / 2 ) + (s0.y + s1.y) / 2 - coord.y;
+                    lowp float dist = line / sqrt(angle * angle + 1.0);
+                    lowp float rotflag = (s0.y > s1.y) ? -1.0 : 1.0;
+                    gl_FragColor = mix(_c1, _c0, smoothstep(0.0, 2 * _d, rotflag * dist + _d));
                 } else {
-                    gl_FragColor                = _color ;
+                    gl_FragColor = _color ;
                 }
 
                 // ------------------------- border radius -------------------------
-                lowp    float   radius[4]   = float[4](_vrrad.x,_vrrad.y,_vrrad.z,_vrrad.w);
-                lowp    int     area        = int(floor((atan(coord.x - center.x, coord.y - center.y) + 3.1415) * 0.636));
-                highp   float   _dist       = length(max(abs(center - coord) - center + radius[area], 0.0)) - radius[area];
-                gl_FragColor                = gl_FragColor * smoothstep(0.0, 0.001, - _dist + 0.001) * qt_Opacity;
+                lowp    float   radius[4] = float[4](_vrrad.x,_vrrad.y,_vrrad.z,_vrrad.w);
+                lowp    int     area = int(atan(coord.x - center.x, coord.y - center.y) * 0.636 + 2);
+                highp   float   _dist = length(max(abs(center - coord) - center + radius[area], 0.0)) - radius[area];
+                gl_FragColor = gl_FragColor * smoothstep(0.0, 0.001, - _dist + 0.001) * qt_Opacity;
             }"
     }
 }
