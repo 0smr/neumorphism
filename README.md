@@ -10,11 +10,19 @@ For drop shadows, I used *ShaderEffect*, so there may be a couple of algorithmic
 [Medium](https://artofofiare.medium.com/neumorphism-the-right-way-a-2020-design-trend-386e6a09040a)
 > Neumorphism (or Neo-skeuomorphism) is a modern iteration of a style of designing web elements, frames, screens, etc. known as [Skeuomorphism](https://medium.muz.li/skeuomorphic-design-a-controversial-ux-approach-that-is-making-a-comeback-a0b6e93eb4bb).
 
-## How to use
-no document provided yet.
+## Preview
 
-## Documentation
-no document provided yet.
+<details open>
+    <summary><b>Example Preview</b></summary>
+    <img src="Extera/Preview/gooeyView-preview-1.webp" width="200px">
+</details>
+<details>
+    <summary><b>Gooey View Preview</b></summary>
+    <img src="Extera/Preview/gooeyView-preview-1.webp" width="200px">
+    
+</details>
+
+---
 
 ## Components
 <details open>
@@ -30,15 +38,19 @@ no document provided yet.
 - [x] ProgressBar
 - [x] RadioButton
 - [x] Switch
+- [x] RangeSlider
+- [x] SpinBox
+- [x] GooeyView <small>(beta)</small>
 
 </details>
 
 <details>
 <summary> Pending</summary>
 
-- [ ] RangeSlider
+- [ ] VerticalSeparator
+- [ ] HorizontalSeparator
+- [ ] MultiPointGradient
 - [ ] MultiRangeSlider
-- [ ] SpinBox
 - [ ] Tumbler
 - [ ] Dial
 - [ ] BusyIndicator
@@ -46,16 +58,17 @@ no document provided yet.
 - [ ] SweepView
 - [ ] SplitView
 - [ ] CircularProgressBar
-- [ ] VerticalSeparator
-- [ ] HorizontalSeparator
-- [ ] GooeyEffect
-- [ ] MultiPointGradient
 
 </details>
 
 ---
 
-## Preview
+## How to use
+no document provided yet.
+
+---
+
+## Documentation
 no document provided yet.
 
 ---
