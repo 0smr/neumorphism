@@ -48,7 +48,7 @@ Item {
             let whMin = Math.min(_width,_height)/2;
             if(typeof control.radius == "number"){
                 let rad = 0;
-                rad = Math.min(control.radius, whMin);
+                rad = Math.min(Math.max(control.radius, 0.01), whMin);
                 return Qt.vector4d(rad,rad,rad,rad);
             }
             else if(typeof control.radius == "object" && whMin > 0) {
@@ -65,10 +65,10 @@ Item {
                  *   X  Y  Z  W
                  */
                 return Qt.vector4d(
-                            Math.min(control.radius.x, whMin),
-                            Math.min(control.radius.z, whMin),
-                            Math.min(control.radius.w, whMin),
-                            Math.min(control.radius.y, whMin),
+                            Math.min(Math.max(control.radius.x, 0.01), whMin),
+                            Math.min(Math.max(control.radius.y, 0.01), whMin),
+                            Math.min(Math.max(control.radius.z, 0.01), whMin),
+                            Math.min(Math.max(control.radius.w, 0.01), whMin),
                         );
             }
             else {
@@ -82,6 +82,8 @@ Item {
          *  │ Y │ │
          *  ├───┼─┤
          *  └───┴─┘
+         * NOTE: GLSL work without "mod" function in at this code "lowp int area = int(mod(-atan(", and I don't know why?!
+         * there is no overflow here?
          */
 
         fragmentShader: "
@@ -122,10 +124,10 @@ Item {
                 }
 
                 // ------------------------- border radius -------------------------
-                lowp    float   radius[4] = float[4](_vrrad.x,_vrrad.y,_vrrad.z,_vrrad.w);
-                lowp    int     area = int(atan(coord.x - center.x, coord.y - center.y) * 0.636 + 2);
+                lowp    float   radius[4] = float[4](_vrrad.x, _vrrad.y, _vrrad.z, _vrrad.w);
+                lowp    int     area = int(mod(-atan(coord.x - center.x, coord.y - center.y) * 0.636 + 3,4));
                 highp   float   _dist = length(max(abs(center - coord) - center + radius[area], 0.0)) - radius[area];
-                gl_FragColor = gl_FragColor * smoothstep(0.0, 0.001, - _dist + 0.001) * qt_Opacity;
+                gl_FragColor = gl_FragColor * smoothstep(0.0, 0.01, - _dist + 0.001) * qt_Opacity;
             }"
     }
 }
