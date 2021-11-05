@@ -40,6 +40,7 @@ QQC.ApplicationWindow {
                 palette.buttonText: Qt.darker(window.color, 1.5)
                 highlighted: true
                 font { family: icoFont.name; weight: Font.DemiBold; }
+                onClicked: colorAnimation.running = true;
             }
 
             Button {
@@ -124,12 +125,6 @@ QQC.ApplicationWindow {
                 palette.text: Qt.darker(window.color, 1.5)
             }
         }
-
-        AdvancedRectangle {
-            width:  50; height: 50
-            color: Qt.darker(window.color, 1.5)
-            radius: Qt.vector4d(0.0,0.3,0.1,0.5)
-        }
     }
 
     Window {
@@ -137,5 +132,21 @@ QQC.ApplicationWindow {
         ColorPicker { id: colorPicker; onSelectedColorChanged: window.color = selectedColor }
         title: ''; flags: Qt.Tool;
         minimumWidth:   colorPicker.width; minimumHeight:  200
+    }
+
+    SequentialAnimation on color {
+        id: colorAnimation
+        running: false
+        ColorAnimation { to: "#e7e7e7"; duration: 1000}
+        PauseAnimation { duration: 500 }
+        ColorAnimation { to: "#dc9797"; duration: 1000}
+        PauseAnimation { duration: 500 }
+        ColorAnimation { to: "#d297dc"; duration: 1000}
+        PauseAnimation { duration: 500 }
+        ColorAnimation { to: "#dbc19a"; duration: 1000}
+        PauseAnimation { duration: 500 }
+        ColorAnimation { to: "#78ca85"; duration: 1000}
+        PauseAnimation { duration: 500 }
+        ColorAnimation { to: "#78b6ca"; duration: 1000}
     }
 }
