@@ -1,6 +1,9 @@
 module Neumorphism
 typeinfo neumorphism.qmltypes
 
+plugin gooeyviewplugin
+classname GooeyViewPlugin
+
 Script                  1.0 script.js
 
 singleton Neumorphism   1.0 Neumorphism.qml
@@ -13,7 +16,6 @@ RoundedOutEffect        1.0 Base/RoundedOutEffect.qml
 AdvancedRectangle       1.0 Base/AdvancedRectangle.qml
 BoxShadow               1.0 Base/BoxShadow.qml
 GradientColor           1.0 Base/GradientColor.qml
-ItemShadow.qml          1.0 Base/ItemShadow.qml
 
 Button                  1.0 Button.qml
 CheckBox                1.0 CheckBox.qml

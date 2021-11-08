@@ -22,6 +22,18 @@ Module {
         "QtQuick.Window 2.2"
     ]
     Component {
+        name: "GooeyView"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["Neumorphism/GooeyView 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "color"; type: "QColor" }
+        Property { name: "spread"; type: "double" }
+        Property { name: "itemList"; type: "QList<QQuickItem*>" }
+        Property { name: "fragmentShader"; type: "std::string" }
+        Signal { name: "itemChanged" }
+    }
+    Component {
         prototype: "QObject"
         name: "Neumorphism/Neumorphism 1.0"
         exports: ["Neumorphism/Neumorphism 1.0"]

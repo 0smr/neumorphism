@@ -22,6 +22,16 @@ QML_FILES += \
     $$PWD/TextField.qml \
     $$PWD/Tumbler.qml
 
+HEADERS += \
+    $$PWD/gooeyview.h \
+    $$PWD/gooeyviewplugin.h
+
+SOURCES += \
+    $$PWD/gooeyview.cpp \
+    $$PWD/gooeyviewplugin.cpp
+
+
+
 
 
 
