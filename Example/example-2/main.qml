@@ -12,12 +12,6 @@ QQC.ApplicationWindow {
     visible: true
     color: "#eeeeee"
 
-    FontLoader {
-        id:     icoFont
-        name:   "icoFont"
-        source: "qrc:/resources/icofont.ttf"
-    }
-
     AdvancedRectangle {
         id: aRect
         width:  100; height: 100

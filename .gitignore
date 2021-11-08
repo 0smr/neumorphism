@@ -9,3 +9,5 @@ build*
 # qt IDE user settigns
 *.user
 *.autosave
+
+/.vscode

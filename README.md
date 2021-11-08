@@ -13,13 +13,17 @@ For drop shadows, I used *ShaderEffect*, so there may be a couple of algorithmic
 ## Preview
 
 <details open>
-    <summary><b>Example Preview</b></summary>
-    <img src="Extera/Preview/gooeyView-preview-1.webp" width="200px">
+    <summary>Preview-1 (<i>Components</i>)</summary>
+    <img src="Extera/Preview/neumorphism-preview-1.webp" height="200px">&nbsp;
+    <img src="Extera/Preview/neumorphism-preview-2.webp" height="200px">
 </details>
 <details>
-    <summary><b>Gooey View Preview</b></summary>
-    <img src="Extera/Preview/gooeyView-preview-1.webp" width="200px">
-    
+    <summary>Preview-2 (<i>Color changes</i>)</summary>
+    <video src="Extera/Preview/neumorphism-preview-3.mp4" height="400px" autoplay loop>
+</details>
+<details>
+    <summary>Preview-3 (<i>Gooey view</i>)</summary>
+    <img src="Extera/Preview/gooeyView-preview-1.webp" height="200px">
 </details>
 
 ---
