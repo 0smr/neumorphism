@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     // Path to module componnents
     engine.addImportPath(QCoreApplication::applicationDirPath () +
-                         "/../../../../qml-neumorphism");
+                         "/../../../../qml-neumorphism/");
     engine.addPluginPath(QCoreApplication::applicationDirPath () +
                          "/../../../Neumorphism/debug");
 
