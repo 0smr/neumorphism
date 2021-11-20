@@ -20,7 +20,13 @@ QML_FILES += \
     $$PWD/Switch.qml \
     $$PWD/TextArea.qml \
     $$PWD/TextField.qml \
-    $$PWD/Tumbler.qml
+    $$PWD/Tumbler.qml \
+    $$PWD/HorizontalSeprator.qml \
+    $$PWD/BusyIndicator.qml \
+    $$PWD/SplitView.qml \
+    $$PWD/Frame.qml \
+    $$PWD/ComboBox.qml \
+    $$PWD/SwipeView.qml
 
 HEADERS += \
     $$PWD/gooeyview.h \
@@ -29,7 +35,6 @@ HEADERS += \
 SOURCES += \
     $$PWD/gooeyview.cpp \
     $$PWD/gooeyviewplugin.cpp
-
 
 
 

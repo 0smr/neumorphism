@@ -27,9 +27,8 @@ import Neumorphism 1.0
 Item {
     id: control
 
-    property color  color: Neumorphism.color;
     property alias shadow: shadowEffect.shadow
-    property alias border: shadowEffect.border
+    property color color: Neumorphism.color
 
     implicitWidth: 50
     implicitHeight: 50
@@ -40,87 +39,59 @@ Item {
         implicitWidth:  parent.width
         implicitHeight: parent.height
 
-        property Border border: Border {
-                radius: width / 2
-                margin: width * 0.1
-            }
-
         property Shadow shadow: Shadow {
-                offset: 0.98
-                radius: 0.50
-                spread: 0.50
-                angle:  45
+                offset: 0
+                radius: 0
+                spread: 0
+                angle: 45
                 distance: 0.45
                 color1: Qt.darker (control.color, 1.15);
                 color2: Qt.lighter(control.color, 1.20);
             }
 
-        readonly property real _shradius: {
-            const min = Math.min(_width, _height);
-            return Math.max(Math.min(shadow.radius, min + _offset*2), 0.0);// radius must be greater than zero
-        }
-        readonly property color color1: shadow.color1
-        readonly property color color2: shadow.color2
-        readonly property real _spread: shadow.spread * 0.99999 - 0.5
-        readonly property real _width:  width  / Math.max(width, height)
-        readonly property real _height: height / Math.max(width, height)
-        readonly property real _offset: shadow.offset/2 - 0.5
-        readonly property real _angle:  shadow.angle
-        readonly property real _shdiff: shadow.distance
-        readonly property real _radius: {
+        readonly property real whmax: Math.max(width, height);
+        readonly property vector2d ratio: Qt.vector2d(width / whmax, height / whmax);
+        readonly property color color1: shadow.color1;
+        readonly property color color2: shadow.color2;
+        readonly property real spread: shadow.spread / whmax;
+        readonly property real offset: shadow.offset / whmax;
+        readonly property real angle: shadow.angle * 0.0174533; // to radian
+        readonly property real shdiff: shadow.distance;
+        readonly property real radius: {
             const min = Math.min(width, height);
-            return Math.min(border.radius, min / 2) / Math.max(width, height);
+            return Math.min(Math.max(shadow.radius, spread), min/2) / whmax;
         }
 
         fragmentShader: "
             #version 330
-            uniform highp   float   qt_Opacity;
-            varying highp   vec2    qt_TexCoord0;
-            uniform mediump float   _shradius;
-            uniform mediump float   _width;
-            uniform mediump float   _height;
-            uniform lowp    float   _shdiff;
-            uniform lowp    float   _angle;
-            uniform lowp    float   _offset;
-            uniform lowp    float   _spread;
-            uniform lowp    float   _radius;
-            uniform lowp    vec4    color1;
-            uniform lowp    vec4    color2;
-
-            highp float linearstep(in highp float e0, in highp float e1, in highp float x) {
-                return clamp((x - e0) / (e1 - e0), 0.0, 1.0);
-            }
+            uniform highp float qt_Opacity;
+            varying highp vec2 qt_TexCoord0;
+            uniform highp vec2 ratio;
+            uniform highp float shdiff;
+            uniform highp float angle;
+            uniform highp float offset;
+            uniform highp float spread;
+            uniform highp float radius;
+            uniform highp vec4 color1;
+            uniform highp vec4 color2;
 
             void main() {
                 // ---------------- normalized center and coordinate ----------------
-                highp vec2 center = vec2(_width, _height)/2.0;
-                highp vec2 coord  = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
-                highp vec2 offset = center + _offset + _shradius / 2.0;
+                highp vec2 center = ratio / 2.0;
+                highp vec2 coord = qt_TexCoord0 * ratio;
+                // ------------------------- color assignment -----------------------
+                // normal coordinate to center
+                highp vec2 ncoord = coord - center;
+                highp float slop = tan(angle);
+                highp float mult = 1.57079 < angle && angle < 4.7123 ? -1 : 1;
+                highp float ratio = smoothstep(0, shdiff, mult * (slop * ncoord.x + ncoord.y)/sqrt(slop * slop + 1) + shdiff/2);
+                gl_FragColor = mix(color1, color2, ratio);
 
-                // ----------------- inner shadow spread and offset -----------------
-                lowp float shadowAlpha =
-                    smoothstep(0.0, _shradius, offset.x - abs(center.x - coord.x)) *
-                    smoothstep(0.0, _shradius, offset.y - abs(center.y - coord.y));
-
-                highp float spreadMulti     = 1.0 - linearstep(_spread, 1.0 - _spread, shadowAlpha);
-                highp float alpha           = qt_Opacity * spreadMulti;
-
-                // ---------------- color 1 and color 2 divisiveness ----------------
-                lowp float a                = tan(_angle * 0.01745);
-                lowp float x0               = a * (qt_TexCoord0.x - 0.5) - 0.5;
-                lowp float line             = abs(x0 + qt_TexCoord0.y);
-                lowp float coordDist        = line/sqrt(a*a+1.0);
-                bool colorSwitch            = (x0 < -qt_TexCoord0.y) ^^ (90.0 < _angle && _angle <= 270.0);
-                gl_FragColor                = mix(color2, color1, float(colorSwitch)) * alpha;
-
-                if(coordDist <= _shdiff) {
-                    coordDist               = mix(-coordDist, coordDist, float(colorSwitch));
-                    gl_FragColor            = mix(color2, color1, smoothstep(0., _shdiff * 2.0 , coordDist + _shdiff)) * alpha;
-                }
-
-                // ---------------------- border radius clip ----------------------
-                highp float distance 		= length(max(abs(coord - center) - center + _radius, 0.0)) - _radius;
-                gl_FragColor                *= smoothstep(0.0, 0.0, 0.001 - distance);
+                // -------------------- shadow spread and offset ---------------------
+                highp float dist = length(max(abs(center - coord) - center + radius, 0.0)) - radius;
+                gl_FragColor = gl_FragColor * smoothstep(0.0, spread, dist + offset) * qt_Opacity;
+                // cliping center area
+                gl_FragColor = gl_FragColor * smoothstep(0.0, 0.01, - dist + 0.005) * qt_Opacity;
             }"
     }
 }

@@ -56,20 +56,18 @@ T.RangeSlider {
         Behavior on width { NumberAnimation{ duration: 200} }
 
         BoxShadow {
-            x: -width * 0.1
-            y: x
-
-            property real offset: control.height * (first.pressed ? 0.30 : 0.25)
-
-            width:  ibox2.width + offset
+            x: -1.5
+            y: -1.5
+            width: ibox2.width * 1.4
             height: width
-            color: '#99000000'
+            color: '#66000000'
+
             shadow {
-                radius: 1.00
-                spread: 0.50 * 50
+                radius: width/2
+                spread: 10 + (first.pressed ? 2 : 6)
             }
 
-            Behavior on offset { NumberAnimation{ duration: 100} }
+            Behavior on shadow.spread { NumberAnimation{ duration: 100} }
         }
 
         AdvancedRectangle {
@@ -99,20 +97,18 @@ T.RangeSlider {
         Behavior on width { NumberAnimation{ duration: 200} }
 
         BoxShadow {
-            x: -width * 0.1
-            y: x
-
-            property real offset: control.height * (second.pressed ? 0.30 : 0.25)
-
-            width:  ibox2.width + offset
+            x: -1.5
+            y: -1.5
+            width: ibox2.width * 1.4
             height: width
-            color: '#99000000'
+            color: '#66000000'
+
             shadow {
-                radius: 1.00
-                spread: 0.50 * 50
+                radius: width/2
+                spread: 10 + (first.pressed ? 2 : 6)
             }
 
-            Behavior on offset { NumberAnimation{ duration: 100} }
+            Behavior on shadow.spread { NumberAnimation{ duration: 100} }
         }
 
         AdvancedRectangle {
@@ -146,12 +142,11 @@ T.RangeSlider {
         height: control.horizontal ? 10 : control.availableHeight
 
         shadow {
-            radius: 1.00
-            offset: 0.99
-            spread: 0.40
+            radius: width
+            offset: 6
+            spread: 10
+            distance: 0.05
             angle:  control.horizontal ? 0.00 : 90.0
         }
-
-        border { radius: width }
     }
 }

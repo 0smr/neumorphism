@@ -45,13 +45,10 @@ T.RadioButton {
         implicitHeight: 28
 
         shadow {
-            radius: 1.00
-            offset: 0.85
-            spread: 0.60
-        }
-
-        border {
-            radius: width / 2.0
+            radius: width
+            offset: 10
+            spread: 20
+            distance: 1.0
         }
 
         x: control.text ?
@@ -72,7 +69,7 @@ T.RadioButton {
         BoxShadow {
             id: ishade
             anchors.centerIn: parent
-            anchors.verticalCenterOffset:   control.padding/4
+            anchors.verticalCenterOffset: control.padding/4
             anchors.horizontalCenterOffset: control.padding/4
 
             width:  control.checked ? ibox.width * 1.4 : 0
@@ -81,26 +78,26 @@ T.RadioButton {
             color: '#77000000'
 
             shadow {
-                radius: 1.00
-                spread: 0.30 * 50
+                radius: width/2
+                spread: 20
             }
 
-            Behavior on width   {NumberAnimation{ duration: 100 }}
+            Behavior on width {NumberAnimation{ duration: 23 }}
             Behavior on opacity {NumberAnimation{ duration: 100 }}
         }
 
         AdvancedRectangle {
             id: ibox
-            x: (parent.width  - width)/2
+            x: (parent.width - width)/2
             y: x
 
-            width:  control.checked ? parent.width  * 0.75 : 0
+            width: control.checked ? parent.width * 0.75 : 0
             height: width
 
             radius: 0.5
             gradient: [
                 GradientColor{color: Qt.lighter(control.palette.button, 1.20); stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.05); stop: Qt.vector2d(1,1)}
+                GradientColor{color: Qt.darker(control.palette.button, 1.05); stop: Qt.vector2d(1,1)}
             ]
 
             Behavior on width { NumberAnimation{ duration: 100 } }
@@ -108,11 +105,11 @@ T.RadioButton {
     }
 
     contentItem: Text {
-        leftPadding:    control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding:   control.indicator &&  control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
         verticalAlignment: Text.AlignVCenter
-        text:           control.text
-        font:           control.font
-        color:          control.palette.buttonText
+        text: control.text
+        font: control.font
+        color: control.palette.buttonText
     }
 }

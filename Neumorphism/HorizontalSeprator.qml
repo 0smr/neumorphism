@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 Control {
     id: control
 
-    property color color: "#ffffff";
     property real a: 0.22;
     property real b: 1.75;
     property bool topShade: true;
@@ -16,15 +15,11 @@ Control {
         width:  parent.width;
         height: parent.height;
 
-        readonly property color _color: control.color;
-        readonly property real _a: control.a;
-        readonly property real _b: control.b;
-        readonly property real _dir: control.topShade ? 1 : -1;
-        readonly property real _spread: control.spread;
-        readonly property real _tmargin: {
-            const min = Math.min(_a * Math.atan(-_b/4), _a * Math.atan( _b/4));
-            return min + 0.45 - (_spread * 10)/height
-        }
+        readonly property color color: control.palette.base;
+        readonly property real a: control.a;
+        readonly property real b: control.b;
+        readonly property real dir: control.topShade ? 1 : -1;
+        readonly property real spread: control.spread;
 
         readonly property vector2d ratio:  {
             const max = Math.max(width, height);
@@ -33,26 +28,25 @@ Control {
 
         fragmentShader: "
             #version 330
-            varying highp   vec2  qt_TexCoord0;
-            uniform highp   float qt_Opacity;
-            uniform highp   float _a;
-            uniform highp   float _b;
-            uniform highp   float _dir;
-            uniform highp   float _spread;
-            uniform highp   float _tmargin;
-            uniform highp   vec2  ratio;
-            uniform mediump vec4  _color;
+            varying highp vec2  qt_TexCoord0;
+            uniform highp float qt_Opacity;
+            uniform highp float a;
+            uniform highp float b;
+            uniform highp float dir;
+            uniform highp float spread;
+            uniform highp vec2  ratio;
+            uniform highp vec4  color;
 
             void main() {
                 highp vec2 coord = (qt_TexCoord0 - vec2(0.5)) * ratio;
-                highp float bx = _b * coord.x;
-                highp float slop = _a * _b/(1 + bx * bx);
+                highp float bx = b * coord.x;
+                highp float slop = a * b/(1 + bx * bx);
                 highp float coordDist = (slop * coord.x + coord.y)/sqrt(slop * slop + 1);
 
                 highp float edges = smoothstep(0, 0.20, - abs(coord.x) + 0.48);
-                highp float shade = smoothstep(0, 0.01, - _dir * coordDist) * (_spread + _dir *  10 * coordDist);
+                highp float shade = smoothstep(0, 0.01, - dir * coordDist) * (spread + dir *  10 * coordDist);
 
-                gl_FragColor = _color * edges * shade * qt_Opacity;
+                gl_FragColor = color * edges * shade * qt_Opacity;
             }"
     }
 }

@@ -56,10 +56,10 @@ T.Slider {
             width:  ibox.width + offset
             height: width
 
-            color: '#99000000'
+            color: '#66000000'
             shadow {
-                radius: 1.00
-                spread: 0.50 * 50
+                radius: width
+                spread: 16
             }
 
             Behavior on offset { NumberAnimation{ duration: 100} }
@@ -96,12 +96,11 @@ T.Slider {
         height: control.horizontal ? 10 : control.availableHeight
 
         shadow {
-            radius: 1.00
-            offset: 0.99
-            spread: 0.40
+            radius: width
+            offset: 6
+            spread: 10
+            distance: 0.05
             angle:  control.horizontal  ? 0.00 : 90.0
         }
-
-        border { radius: width }
     }
 }

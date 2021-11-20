@@ -25,7 +25,7 @@ import QtQuick 2.15
 Item {
     id: control
 
-    implicitWidth:  50
+    implicitWidth: 50
     implicitHeight: 50
 
     property color color: '#000'
@@ -34,44 +34,41 @@ Item {
     ShaderEffect {
         id: effect
 
-        width:  control.width;
+        width: control.width;
         height: control.height;
 
         property Shadow shadow: Shadow {
-            offset:   0.8
-            radius:   0.8
-            spread:   0.7
+            radius: 0
+            spread: 0
         }
 
-        readonly property real _shradius: {
-            const min = Math.min(_width, _height);
-            return Math.min(Math.max(shadow.radius/2, _spread), min/2);
+        readonly property vector2d ratio: Qt.vector2d(width / whmax, height / whmax);
+        readonly property real whmax: Math.max(width, height);
+        readonly property real spread: shadow.spread / whmax;
+        readonly property color color: control.color;
+        readonly property real radius: {
+            const min = Math.min(width, height);
+            return Math.min(Math.max(shadow.radius, spread), min/2) / whmax;
         }
-
-        readonly property real  _width:  width  / Math.max(width, height);
-        readonly property real  _height: height / Math.max(width, height);
-        readonly property real  _spread: shadow.spread / Math.max(width, height);
-        readonly property color _color:  control.color;
 
         fragmentShader: "
             #version 330
-            varying highp   vec2    qt_TexCoord0;
-            uniform highp   float   qt_Opacity;
-            uniform mediump float   _width;
-            uniform mediump float   _height;
-            uniform mediump float   _shradius;
-            uniform mediump float   _spread;
-            uniform lowp    vec4    _color;
+            varying highp vec2 qt_TexCoord0;
+            uniform highp float qt_Opacity;
+            uniform highp float radius;
+            uniform highp float spread;
+            uniform highp vec2 ratio;
+            uniform highp vec4 color;
 
             void main() {
                 // ---------------- normalized center and coordinate ----------------
-                highp vec2 center = vec2(_width, _height) / 2.0;
-                highp vec2 coord  = vec2(qt_TexCoord0.x * _width, qt_TexCoord0.y * _height);
+                highp vec2 center = ratio / 2.0;
+                highp vec2 coord = qt_TexCoord0 * ratio;
                 // ------------------------- color assignment -----------------------
-                gl_FragColor      = _color ;
+                gl_FragColor = color ;
                 // ---------------------- shadow spread and radius ------------------
-                highp float _dist = length(max(abs(center - coord) - center + _shradius, 0.0)) - _shradius;
-                gl_FragColor      = gl_FragColor * smoothstep(0.0, _spread, - _dist + 0.001) * qt_Opacity;
+                highp float dist = length(max(abs(center - coord) - center + radius, 0.0)) - radius;
+                gl_FragColor = gl_FragColor * smoothstep(0.0, spread, - dist + 0.001) * qt_Opacity;
             }"
     }
 }

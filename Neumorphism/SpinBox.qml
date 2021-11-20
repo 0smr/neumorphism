@@ -98,23 +98,21 @@ T.SpinBox {
 
         color: control.palette.button
 
-        border { radius: width; margin: height * 0.1 }
-
         shadow {
-            offset:     0.88;
-            radius:     1.00;
-            spread:     control.enabled ? 0.40 : 0.70;
-            distance:   0.30;
-            angle:      45.0;
+            offset:     5;
+            radius:     width;
+            spread:     control.enabled ? 10 : 25;
+            distance:   0.2;
+            angle:      20.0;
             color1:     Qt.lighter(background.color, 1.30);
             color2:     Qt.darker (background.color, 1.20);
         }
 
         AdvancedRectangle {
-            x: (parent.width - width)   /2
+            x: (parent.width - width) /2
             y: (parent.height - height) /2
-            width: parent.width - parent.border.margin * 3.0
-            height: parent.height - parent.border.margin * 3.0
+            width: parent.width * 0.9
+            height: parent.height * 0.80
             radius: 0.5
 
             gradient: [
@@ -131,18 +129,19 @@ T.SpinBox {
         RoundedInEffect {
             id: innerShade
 
-            x: (parent.width - width)   /2
+            x: (parent.width - width) /2
             y: (parent.height - height) /2
 
             width:  control.implicitWidth * 0.45
-            height: (parent.height - parent.border.margin * 2.0) * 0.7
+            height: (parent.height - 2.0) * 0.7
 
             color: control.palette.button
-            border.radius: height * 0.3
             shadow {
-                radius: 0.30
-                spread: 0.80
-                offset: control.activeFocus ? 0.95 : 0.99
+                radius: 10
+                spread: 10
+                offset: control.activeFocus ? 6 : 5
+                angle: 25
+                distance: 0.8
             }
 
             Behavior on shadow.offset {NumberAnimation{duration: 100}}

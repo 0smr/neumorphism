@@ -57,10 +57,6 @@ T.Switch {
             spread: 0.50
         }
 
-        border {
-            radius: width / 2.0
-        }
-
         /*!
          * TODO: add active and visual focus effect
          * control.visualFocus

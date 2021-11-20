@@ -25,9 +25,9 @@ T.Button {
     id: control
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                            implicitContentWidth + leftPadding + rightPadding)
+                                implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                             implicitContentHeight + topPadding + bottomPadding)
+                                implicitContentHeight + topPadding + bottomPadding)
 
     padding: 6
     spacing: 6
@@ -80,20 +80,17 @@ T.Button {
 
             color: control.palette.button
 
-            border { radius: width; margin: width * 0.1 }
-
             shadow {
-                radius:     1.00;
-                offset:     control.down ? 0.68 :
-                            control.checked ? 0.72 : 0.75;
-                spread:     !control.enabled ? 0.70: 0.48;
-                distance:   0.40;
+                radius:     width;
+                offset:     7;
+                spread:     control.down || control.checked ? 13: 9;
+                distance:   1.00;
                 angle:      45.0;
                 color1:     Qt.lighter(background.color, 1.30);
                 color2:     Qt.darker (background.color, 1.20);
             }
 
-            Behavior on shadow.offset {
+            Behavior on shadow.spread {
                 NumberAnimation { duration: 100 }
             }
 
@@ -111,20 +108,23 @@ T.Button {
             }
 
             RoundedInEffect {
-                x: parent.border.margin * 1.25
+                x: (parent.width - width)/2
                 y: x
 
-                width:  parent.width - parent.border.margin * 2.5
+                width:  parent.width * 0.75
                 height: width
                 color: control.palette.button
 
+                opacity: control.checked ? 1 : 0
+
                 shadow {
-                    radius: 1.00
-                    spread: control.checked? 0.92 : 1.00
-                    offset: 1.0
+                    radius: width
+                    spread: 5
+                    offset: 4
+                    distance: 2
                 }
 
-                Behavior on shadow.spread {
+                Behavior on opacity {
                     NumberAnimation{ duration: 100 }
                 }
             }

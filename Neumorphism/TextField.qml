@@ -85,13 +85,11 @@ T.TextField {
          * control.activeFocus
          */
         shadow {
-            offset: 0.98
-            radius: 0.10
-            spread: 0.50
-        }
-
-        border {
-            radius: width * 0.05
+            distance: 0.5
+            offset: 5
+            radius: 5
+            spread: 10
+            angle: 25
         }
     }
 }

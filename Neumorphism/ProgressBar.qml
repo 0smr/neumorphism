@@ -58,8 +58,8 @@ T.ProgressBar {
             color:  '#77000000'
 
             shadow {
-                radius: 1.00
-                spread: 0.30 * 50
+                radius: width
+                spread: 18
             }
         }
 
@@ -116,14 +116,11 @@ T.ProgressBar {
         color: control.palette.button
 
         shadow {
-            offset: 1.00
-            radius: 1.00
-            spread: vars.vertical ? 0.45 : 0.40
-            angle:  vars.vertical ? 90.0 : 0.00
-        }
-
-        border {
             radius: width
+            offset: 15
+            spread: 20
+            distance: 0.2
+            angle:  vars.vertical ? 90.0 : 0.00
         }
     }
 }

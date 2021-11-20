@@ -12,6 +12,7 @@ QQC.ApplicationWindow {
     height: 520
     visible: true
     color: "#78b6ca" // #78ca85
+    palette.text: "#fff"
 
     FontLoader {
         id:     icoFont
@@ -82,6 +83,14 @@ QQC.ApplicationWindow {
             palette.button: window.color
             palette.buttonText: Qt.darker(window.color, 1.5)
             font { family: icoFont.name; weight: Font.DemiBold; }
+        }
+
+        HorizontalSeprator {
+            height: 50
+            width: 180
+            a: 0.1
+            spread: 0.8
+            palette.base: Qt.lighter(window.color, 1.1)
         }
 
         ProgressBar {

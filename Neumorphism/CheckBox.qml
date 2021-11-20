@@ -49,13 +49,10 @@ T.CheckBox {
         implicitHeight: 28
 
         shadow {
-            offset: 0.8
-            radius: 0.5
-            spread: 0.6
-        }
-
-        border {
-            radius: width * 0.2
+            offset: 5
+            radius: 7
+            spread: 8
+            distance: 1.0
         }
 
         x: control.text ?
@@ -83,8 +80,8 @@ T.CheckBox {
             color: '#44000000'
 
             shadow {
-                radius: 0.00
-                spread: 0.20 * 50
+                radius: 10
+                spread: 10
             }
         }
 
