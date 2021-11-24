@@ -39,7 +39,7 @@ Item {
                 anchors.fill: parent
                 acceptedButtons: Qt.NoButton
                 onWheel: {
-                    slider.value -= wheel.angleDelta.y * (slider.from - slider.to) / 14400
+                    slider.value -= wheel.angleDelta.y / 120 * slider.stepSize
                 }
             }
         }

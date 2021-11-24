@@ -4,33 +4,37 @@ typeinfo neumorphism.qmltypes
 plugin gooeyviewplugin
 classname GooeyViewPlugin
 
-Script                  1.0 script.js
+Script                 1.0 script.js
 
-singleton Neumorphism   1.0 Neumorphism.qml
+singleton Neumorphism  1.0 Neumorphism.qml
 
-internal Shadow         Base/Shadow.qml
-internal Border         Base/Border.qml
+internal Shadow        Base/Shadow.qml
+internal Border        Base/Border.qml
 
-RoundedInEffect         1.0 Base/RoundedInEffect.qml
-RoundedOutEffect        1.0 Base/RoundedOutEffect.qml
-AdvancedRectangle       1.0 Base/AdvancedRectangle.qml
-BoxShadow               1.0 Base/BoxShadow.qml
-GradientColor           1.0 Base/GradientColor.qml
+RoundedInEffect        1.0 Base/RoundedInEffect.qml
+RoundedOutEffect       1.0 Base/RoundedOutEffect.qml
+AdvancedRectangle      1.0 Base/AdvancedRectangle.qml
+BoxShadow              1.0 Base/BoxShadow.qml
+GradientColor          1.0 Base/GradientColor.qml
+DashedRing             1.0 Base/DashedRing.qml
+DashedRect             1.0 Base/DashedRect.qml
 
-Button                  1.0 Button.qml
-CheckBox                1.0 CheckBox.qml
-Label                   1.0 Label.qml
-ProgressBar             1.0 ProgressBar.qml
-RadioButton             1.0 RadioButton.qml
-RangeSlider             1.0 RangeSlider.qml
-Slider                  1.0 Slider.qml
-SpinBox                 1.0 SpinBox.qml
-Switch                  1.0 Switch.qml
-TextArea                1.0 TextArea.qml
-TextField               1.0 TextField.qml
-Tumbler                 1.0 Tumbler.qml
-HorizontalSeprator      1.0 HorizontalSeprator.qml
-SplitView               1.0 SplitView.qml
-SwipeView               1.0 SwipeView.qml
-Frame                   1.0 Frame.qml
-ComboBox                1.0 ComboBox.qml
+Button                 1.0 Button.qml
+CheckBox               1.0 CheckBox.qml
+Label                  1.0 Label.qml
+ProgressBar            1.0 ProgressBar.qml
+RadioButton            1.0 RadioButton.qml
+RangeSlider            1.0 RangeSlider.qml
+MultiRangeSlider       1.0 MultiRangeSlider.qml
+Slider                 1.0 Slider.qml
+SpinBox                1.0 SpinBox.qml
+Switch                 1.0 Switch.qml
+TextArea               1.0 TextArea.qml
+TextField              1.0 TextField.qml
+Tumbler                1.0 Tumbler.qml
+HorizontalSeprator     1.0 HorizontalSeprator.qml
+SplitView              1.0 SplitView.qml
+SwipeView              1.0 SwipeView.qml
+Frame                  1.0 Frame.qml
+Dial                   1.0 Dial.qml
+ComboBox               1.0 ComboBox.qml

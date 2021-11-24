@@ -8,6 +8,8 @@ QML_FILES += \
     $$PWD/Base/RoundedInEffect.qml \
     $$PWD/Base/RoundedOutEffect.qml \
     $$PWD/Base/Shadow.qml \
+    $$PWD/Base/DashedRing.qml \
+    $$PWD/Base/DashedRect.qml \
     $$PWD/Button.qml \
     $$PWD/CheckBox.qml \
     $$PWD/Label.qml \
@@ -15,6 +17,7 @@ QML_FILES += \
     $$PWD/ProgressBar.qml \
     $$PWD/RadioButton.qml \
     $$PWD/RangeSlider.qml \
+    $$PWD/MultiRangeSlider.qml \
     $$PWD/Slider.qml \
     $$PWD/SpinBox.qml \
     $$PWD/Switch.qml \
@@ -25,6 +28,7 @@ QML_FILES += \
     $$PWD/BusyIndicator.qml \
     $$PWD/SplitView.qml \
     $$PWD/Frame.qml \
+    $$PWD/Dial.qml \
     $$PWD/ComboBox.qml \
     $$PWD/SwipeView.qml
 
