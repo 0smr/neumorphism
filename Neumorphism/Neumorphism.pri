@@ -10,6 +10,7 @@ QML_FILES += \
     $$PWD/Base/Shadow.qml \
     $$PWD/Base/DashedRing.qml \
     $$PWD/Base/DashedRect.qml \
+    $$PWD/Base/Handler.qml \
     $$PWD/Button.qml \
     $$PWD/CheckBox.qml \
     $$PWD/Label.qml \

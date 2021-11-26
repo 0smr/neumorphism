@@ -10,6 +10,7 @@ singleton Neumorphism  1.0 Neumorphism.qml
 
 internal Shadow        Base/Shadow.qml
 internal Border        Base/Border.qml
+internal Handler       Base/Handler.qml
 
 RoundedInEffect        1.0 Base/RoundedInEffect.qml
 RoundedOutEffect       1.0 Base/RoundedOutEffect.qml
