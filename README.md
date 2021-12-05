@@ -48,6 +48,8 @@ For drop shadows, I used *ShaderEffect*, so there may be a couple of algorithmic
 - [x] Tumbler
 - [x] Dial
 - [x] MultiRangeSlider
+- [x] BusyIndicator
+- [x] SplitView
 - [x] GooeyView <small>(beta)</small>
 
 </details>
@@ -56,10 +58,7 @@ For drop shadows, I used *ShaderEffect*, so there may be a couple of algorithmic
 <summary> Pending</summary>
 
 - [ ] MultiPointGradient
-- [ ] BusyIndicator
 - [ ] StackView
-- [ ] SwipeView
-- [ ] SplitView
 - [ ] CircularProgressBar
 
 </details>
