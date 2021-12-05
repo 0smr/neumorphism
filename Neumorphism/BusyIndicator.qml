@@ -20,28 +20,23 @@
 **
 ****************************************************************************/
 
-pragma Singleton
 import QtQuick 2.15
+import QtQuick.Templates 2.15 as T
 
-QtObject {
-    property color color:   '#f5f5f5';
-    property color accent:  '#7DC4FF';
+// @disable-check M129
+T.BusyIndicator {
+    id: control
 
-    function blend(color1, color2, alpha) {
-        var color = color1;
-        color.r = (color.r + color2.r) / 2;
-        color.g = (color.g + color2.g) / 2;
-        color.b = (color.b + color2.b) / 2;
-        color.a = alpha;
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             implicitContentHeight + topPadding + bottomPadding)
 
-        return color;
-    }
+    padding: 6
 
-    function clamp(x, a, b) {
-        return Math.min(Math.max(x, a), b);
-    }
-
-    function remap(value, low1, high1, low2, high2) {
-        return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    contentItem: Item {
+        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 0 }
+        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 400 }
+        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 800 }
     }
 }

@@ -19,8 +19,10 @@ BoxShadow              1.0 Base/BoxShadow.qml
 GradientColor          1.0 Base/GradientColor.qml
 DashedRing             1.0 Base/DashedRing.qml
 DashedRect             1.0 Base/DashedRect.qml
+Wave                   1.0 Base/Wave.qml
 
 Button                 1.0 Button.qml
+BusyIndicator          1.0 BusyIndicator.qml
 CheckBox               1.0 CheckBox.qml
 Label                  1.0 Label.qml
 ProgressBar            1.0 ProgressBar.qml
@@ -35,7 +37,6 @@ TextField              1.0 TextField.qml
 Tumbler                1.0 Tumbler.qml
 HorizontalSeprator     1.0 HorizontalSeprator.qml
 SplitView              1.0 SplitView.qml
-SwipeView              1.0 SwipeView.qml
 Frame                  1.0 Frame.qml
 Dial                   1.0 Dial.qml
 ComboBox               1.0 ComboBox.qml

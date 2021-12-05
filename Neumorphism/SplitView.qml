@@ -20,28 +20,28 @@
 **
 ****************************************************************************/
 
-pragma Singleton
 import QtQuick 2.15
+import QtQuick.Templates 2.15  as T
 
-QtObject {
-    property color color:   '#f5f5f5';
-    property color accent:  '#7DC4FF';
+// @disable-check M129
+T.SplitView {
+    id: control
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             implicitContentHeight + topPadding + bottomPadding)
 
-    function blend(color1, color2, alpha) {
-        var color = color1;
-        color.r = (color.r + color2.r) / 2;
-        color.g = (color.g + color2.g) / 2;
-        color.b = (color.b + color2.b) / 2;
-        color.a = alpha;
+    handle: RoundedOutEffect {
+        implicitWidth: control.orientation === Qt.Horizontal ? 6 : control.width
+        implicitHeight: control.orientation === Qt.Horizontal ? control.height : 6
+        color: control.palette.button
 
-        return color;
-    }
-
-    function clamp(x, a, b) {
-        return Math.min(Math.max(x, a), b);
-    }
-
-    function remap(value, low1, high1, low2, high2) {
-        return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+        shadow {
+            distance: 0.01
+            radius: 10; offset: 2.5;
+            spread: 1; angle: 90;
+            color1: Qt.lighter(color, 1.5)
+            color2: Qt.darker(color, 1.3)
+        }
     }
 }

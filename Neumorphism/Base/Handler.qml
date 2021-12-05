@@ -29,6 +29,9 @@ T.Control {
     property real value: 0
     property real pwidth: parent.width
 
+    signal handlerValueChanged(var handler)
+    signal removed(var handler)
+
     implicitWidth: 10
     implicitHeight: 15
 
@@ -36,6 +39,9 @@ T.Control {
 
     onXChanged: value = (x + width/2) / parent.width
     onPwidthChanged: x = value * pwidth - width/2
+
+    onValueChanged: handlerValueChanged(this)
+    Component.onDestruction: { deleted }
 
     contentItem: Item {
         Rectangle {

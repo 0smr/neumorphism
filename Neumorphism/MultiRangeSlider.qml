@@ -20,17 +20,11 @@
 **
 ****************************************************************************/
 
-
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 
 T.Control {
     id: control
-
-    property var handlers: []
-    property real from: 0
-    property real to: 1
-    property real stepSize: 0.1
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             leftPadding + rightPadding,
@@ -38,9 +32,17 @@ T.Control {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                             topPadding + bottomPadding,
                             topPadding + bottomPadding)
-
     leftPadding: 6
     rightPadding: 6
+
+    property var handlers: []
+    property real from: 0
+    property real to: 1
+    property real stepSize: 0.1
+
+    signal handlerValueChanged(var handler)
+    signal handlerCreated(var handler)
+    signal handlerRemoved(var handler)
 
     function handlerAt(index) {
         return 0 <= index && index <= handlers.length ? handlers[index] : undefined;
@@ -76,10 +78,14 @@ T.Control {
             width: parent.width; height: parent.height/2
             onPressed: {
                 const obj = handlerComponennt.createObject(parent, {x: mouseX - 5});
+                obj.handlerValueChanged.connect(control.handlerValueChanged);
+                obj.removed.connect(handlerRemoved)
                 control.handlers.push(obj);
             }
         }
     }
+
+    Component.onDestruction: {}
 
     background: Item {
         implicitWidth: 100

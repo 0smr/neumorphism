@@ -19,6 +19,7 @@
 ** will be met: https://www.gnu.org/licenses/lgpl.html.
 **
 ****************************************************************************/
+
 import QtQuick 2.15
 import Neumorphism 1.0
 

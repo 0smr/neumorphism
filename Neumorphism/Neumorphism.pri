@@ -11,6 +11,7 @@ QML_FILES += \
     $$PWD/Base/DashedRing.qml \
     $$PWD/Base/DashedRect.qml \
     $$PWD/Base/Handler.qml \
+    $$PWD/Base/Wave.qml \
     $$PWD/Button.qml \
     $$PWD/CheckBox.qml \
     $$PWD/Label.qml \
@@ -31,7 +32,6 @@ QML_FILES += \
     $$PWD/Frame.qml \
     $$PWD/Dial.qml \
     $$PWD/ComboBox.qml \
-    $$PWD/SwipeView.qml
 
 HEADERS += \
     $$PWD/gooeyview.h \
