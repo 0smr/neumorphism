@@ -32,6 +32,7 @@ QML_FILES += \
     $$PWD/Frame.qml \
     $$PWD/Dial.qml \
     $$PWD/ComboBox.qml \
+    $$PWD/StackView.qml \
 
 HEADERS += \
     $$PWD/gooeyview.h \
