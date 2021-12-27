@@ -20,7 +20,6 @@ import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15
 import Neumorphism 1.0
 
-// @disable-check M129
 T.Button {
     id: control
 

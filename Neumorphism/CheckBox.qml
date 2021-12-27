@@ -24,7 +24,6 @@ import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 import Neumorphism 1.0
 
-// @disable-check M129
 T.CheckBox {
     id: control
 

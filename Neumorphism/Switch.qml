@@ -24,7 +24,6 @@
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 
-// @disable-check M129
 T.Switch {
     id: control
 
@@ -52,9 +51,11 @@ T.Switch {
         color: control.palette.button
 
         shadow {
-            radius: 1.00
-            offset: 0.88
-            spread: 0.50
+            offset: 7
+            radius: width
+            spread: 12
+            distance: 1.0
+            angle: 25
         }
 
         /*!
@@ -68,13 +69,14 @@ T.Switch {
             x: ibox.x - width * 0.1
             y: ibox.y - width * 0.1
 
-            width:  ibox.width * 1.42
+            width:  ibox.width * 1.4
             height: width
             color: '#000'
+            opacity: 0.1
 
             shadow {
-                radius: 1.00
-                spread: 0.55 * 50
+                radius: width
+                spread: 10
             }
         }
 

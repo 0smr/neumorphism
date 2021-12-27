@@ -71,18 +71,36 @@ QQC.ApplicationWindow {
             }
         }
 
-        RadioButton {
-            text: "Check\nbox"
-            palette.button: window.color
-            palette.buttonText: Qt.darker(window.color, 1.5)
-            font { family: icoFont.name; weight: Font.DemiBold; }
+        Row {
+            Switch {
+                text: "Check\nbox"
+                palette.button: window.color
+                palette.buttonText: Qt.darker(window.color, 1.5)
+                font { family: icoFont.name; weight: Font.DemiBold; }
+            }
+
+            Switch {
+                text: "Check\nbox"
+                palette.button: window.color
+                palette.buttonText: Qt.darker(window.color, 1.5)
+                font { family: icoFont.name; weight: Font.DemiBold; }
+            }
         }
 
-        RadioButton {
-            text: "Check\nbox"
-            palette.button: window.color
-            palette.buttonText: Qt.darker(window.color, 1.5)
-            font { family: icoFont.name; weight: Font.DemiBold; }
+        Row {
+            RadioButton {
+                text: "Check\nbox"
+                palette.button: window.color
+                palette.buttonText: Qt.darker(window.color, 1.5)
+                font { family: icoFont.name; weight: Font.DemiBold; }
+            }
+
+            RadioButton {
+                text: "Check\nbox"
+                palette.button: window.color
+                palette.buttonText: Qt.darker(window.color, 1.5)
+                font { family: icoFont.name; weight: Font.DemiBold; }
+            }
         }
 
         HorizontalSeprator {

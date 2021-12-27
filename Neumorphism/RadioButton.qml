@@ -25,7 +25,6 @@ import QtQuick.Templates 2.15 as T
 import Neumorphism 1.0
 import "Base"
 
-// @disable-check M129
 T.RadioButton {
     id: control
 

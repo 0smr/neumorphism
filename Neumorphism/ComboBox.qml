@@ -39,7 +39,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import QtQuick.Templates 2.15  as T
 
-// @disable-check M129
 T.ComboBox {
     id: control
 
