@@ -33,15 +33,14 @@ T.CheckBox {
                              implicitContentHeight + topPadding + bottomPadding,
                              implicitIndicatorHeight + topPadding + bottomPadding,
                              indicator.height + topPadding + bottomPadding)
-    property alias shade: ishade.shadow
-    property point xy
+    property alias shadow: indicatorBackground.shadow
     palette.buttonText: 'gray'
 
     padding: 6
     spacing: 6
 
     indicator: RoundedInEffect {
-        id: indicatorBack
+        id: indicatorBackground
 
         implicitWidth:  28
         implicitHeight: 28
@@ -70,31 +69,24 @@ T.CheckBox {
 
         BoxShadow {
             id: ishade
-            x: ibox.x - 2
-            y: ibox.y - 2
 
-            width:  ibox.width * 1.3
-            height: ibox.height* 1.3
+            width: ibox.width + 6
+            height: ibox.height + 6
+            visible: ibox.width > 0
             color: '#44000000'
-
-            shadow {
-                radius: 10
-                spread: 10
-            }
+            anchors.centerIn: ibox
+            shadow { radius: 10; spread: 10 }
         }
 
         AdvancedRectangle {
             id: ibox
-            x: (parent.width  - width) / 2
+            x: (parent.width - width) / 2
             y: (parent.height - height) / 2
 
-            width:  parent.width  * 0.75
-            height: width
-
-            radius: 0.20
+            radius: 0.25
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.2);  stop: Qt.vector2d(0.0,0.0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.02);  stop: Qt.vector2d(1.0,1.0)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0.0,0.0)},
+                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.5,0.5)}
             ]
         }
 
@@ -103,32 +95,42 @@ T.CheckBox {
          */
         states:[
             State {
+                when: control.checkState === Qt.Checked
+                PropertyChanges {
+                    target: ibox
+                    width: indicatorBackground.width * 0.75
+                    height: indicatorBackground.height * 0.75
+                }
+            },
+            State {
                 when: control.checkState === Qt.Unchecked
-                PropertyChanges { target: ishade; width: 0;} // It also make height = 0
-                PropertyChanges { target: ibox;   width: 0;}
+                PropertyChanges { target: ibox; width: 0; height: 0 }
             },
             State {
                 when: control.checkState === Qt.PartiallyChecked
-                PropertyChanges { target: ishade; height: control.indicator.height * 0.40}
-                PropertyChanges { target: ibox;   height: control.indicator.height * 0.20}
+                PropertyChanges {
+                    target: ibox
+                    width: indicatorBackground.width * 0.75
+                    height: indicatorBackground.height * 0.20
+                }
             }
         ]
 
         transitions: [
             Transition {
-                from:   "*"
-                to:     "*"
+                from: "*"
+                to: "*"
                 NumberAnimation { properties: "width, height"; duration: 100 }
             }
         ]
     }
 
     contentItem: Text {
-        leftPadding:    control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding:   control.indicator &&  control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
         verticalAlignment: Text.AlignVCenter
-        text:           control.text
-        font:           control.font
-        color:          control.palette.buttonText
+        text: control.text
+        font: control.font
+        color: control.palette.buttonText
     }
 }

@@ -44,4 +44,8 @@ QtObject {
     function remap(value, low1, high1, low2, high2) {
         return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
     }
+
+    function invertColor(color) {
+        return Qt.rgba(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0);
+    }
 }

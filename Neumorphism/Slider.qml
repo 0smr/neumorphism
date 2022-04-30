@@ -72,8 +72,8 @@ T.Slider {
             radius: 0.5
 
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.3); stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.1); stop: Qt.vector2d(1,1)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0,0)},
+                GradientColor{color: control.palette.button; stop: Qt.vector2d(1,1)}
             ]
         }
     }

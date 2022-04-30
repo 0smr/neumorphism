@@ -70,11 +70,11 @@ T.TextField {
          * control.activeFocus
          */
         shadow {
-            distance: 0.5
             offset: 5
             radius: 5
             spread: 10
-            angle: 25
+            distance: 0.1
+            angle: (Math.atan2(height, width) - 3.141592) * 57.2958
         }
     }
 }

@@ -40,15 +40,10 @@ T.RadioButton {
     indicator: RoundedInEffect {
         id: indicatorBack
 
-        implicitWidth:  28
+        implicitWidth: 28
         implicitHeight: 28
 
-        shadow {
-            radius: width
-            offset: 10
-            spread: 20
-            distance: 1.0
-        }
+        shadow { radius: width; offset: 10; spread: 20; distance: 1.0 }
 
         x: control.text ?
                (control.mirrored ?
@@ -67,36 +62,31 @@ T.RadioButton {
 
         BoxShadow {
             id: ishade
-            anchors.centerIn: parent
-            anchors.verticalCenterOffset: control.padding/4
-            anchors.horizontalCenterOffset: control.padding/4
+            anchors.centerIn: ibox
+            anchors.verticalCenterOffset: control.padding / 4
+            anchors.horizontalCenterOffset: control.padding / 4
 
-            width:  control.checked ? ibox.width * 1.4 : 0
+            width: ibox.width + 6
             height: width
             opacity: control.checked ? 1.0 : 0.0
             color: '#77000000'
 
-            shadow {
-                radius: width/2
-                spread: 20
-            }
-
-            Behavior on width {NumberAnimation{ duration: 23 }}
-            Behavior on opacity {NumberAnimation{ duration: 100 }}
+            shadow.spread: 15
+            shadow.radius: width/2
         }
 
         AdvancedRectangle {
             id: ibox
             x: (parent.width - width)/2
-            y: x
+            y: (parent.width - width)/2
 
-            width: control.checked ? parent.width * 0.75 : 0
+            width: control.checked ? parent.width - control.padding : 0
             height: width
 
             radius: 0.5
             gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.20); stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker(control.palette.button, 1.05); stop: Qt.vector2d(1,1)}
+                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0,0)},
+                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.5,0.5)}
             ]
 
             Behavior on width { NumberAnimation{ duration: 100 } }
@@ -107,8 +97,8 @@ T.RadioButton {
         leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
         rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
         verticalAlignment: Text.AlignVCenter
+        color: control.palette.buttonText
         text: control.text
         font: control.font
-        color: control.palette.buttonText
     }
 }

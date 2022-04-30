@@ -32,10 +32,17 @@ T.BusyIndicator {
                              implicitContentHeight + topPadding + bottomPadding)
 
     padding: 6
+    running: false
 
     contentItem: Item {
-        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 0 }
-        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 400 }
-        Wave { width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 800 }
+        implicitWidth: 100
+        implicitHeight: 100
+
+        width: control.width
+        height: control.height
+
+        Wave { running: control.running; width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 0 }
+        Wave { running: control.running; width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 400 }
+        Wave { running: control.running; width: parent.width; height: parent.height; duration: 4000; maxDelay:800 ;startDelay: 800 }
     }
 }

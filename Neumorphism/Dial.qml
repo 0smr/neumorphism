@@ -27,12 +27,12 @@ import Neumorphism 1.0
 
 T.Dial {
     id: control
+    property alias dashRing: dashRing
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
-    palette.base: '#aaa'
 
     background: RoundedOutEffect {
         implicitWidth: 184
@@ -47,21 +47,22 @@ T.Dial {
     }
 
     handle: DashedRing {
+        id: dashRing
         x: (control.background.width - width)/2
         y: (control.background.height - height)/2
 
-        width: control.width * 0.85
-        height: control.height * 0.85
-        borderWidth: 2.5
+        width: control.width - 25
+        height: control.height - 25
+        borderWidth: 2
         dashWidth: 2
         dashCount: 51
-        palette.base: control.palette.base
+        palette.base: Qt.darker(control.palette.button, 1.3)
         rotation: control.angle * 1.07
 
         Rectangle {
-            x: (parent.width - 2)/2
-            y: - 2
-            width: 2; height: 5
+            x: (parent.width - 2)/2 + 0.5
+            y: -1
+            width: 1; height: 5
             color: parent.palette.base
         }
     }

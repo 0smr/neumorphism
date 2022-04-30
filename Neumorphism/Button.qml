@@ -53,79 +53,73 @@ T.Button {
 
             Image {
                 visible: control.display != AbstractButton.TextOnly
-                source:  control.icon.source
-                width:   control.icon.width
-                height:  control.icon.height
-                cache:   control.icon.cache
+                source: control.icon.source
+                width: control.icon.width
+                height: control.icon.height
+                cache: control.icon.cache
             }
 
             Text {
                 visible: control.display != AbstractButton.IconOnly
-                text:    control.text
-                font:    control.font
-                color:   control.palette.buttonText
+                text: control.text
+                font: control.font
+                color: control.palette.buttonText
                 horizontalAlignment: Text.AlignHCenter
             }
         }
     }
 
-    background:
-        RoundedOutEffect {
-            id: background
-            visible: control.enabled && !control.flat
+    background: RoundedOutEffect {
+        id: background
+        visible: control.enabled && !control.flat
 
-            implicitWidth:  50
-            implicitHeight: 50
+        implicitWidth:  50
+        implicitHeight: 50
 
+        color: control.palette.button
+
+        shadow {
+            radius: width;
+            offset: 7;
+            spread: control.down || control.checked ? 13: 9;
+            distance: 1.00;
+            angle: 45.0;
+            color1: Qt.lighter(background.color, 1.30);
+            color2: Qt.darker(background.color, 1.20);
+        }
+
+        Behavior on shadow.spread {
+            NumberAnimation { duration: 100 }
+        }
+
+        Rectangle {
+            anchors.centerIn: parent
+            width:  parent.width * 0.7
+            height: width
+
+            visible: control.highlighted
+            color: 'transparent'
+            radius: width/2
+            opacity: 0.5
+            border.color: Qt.tint(control.palette.highlight, "#12ffffff")
+            border.width: width * 0.05
+        }
+
+        RoundedInEffect {
+            x: (parent.width - width)/2
+            y: x
+
+            width: parent.width * 0.75
+            height: width
             color: control.palette.button
 
-            shadow {
-                radius:     width;
-                offset:     7;
-                spread:     control.down || control.checked ? 13: 9;
-                distance:   1.00;
-                angle:      45.0;
-                color1:     Qt.lighter(background.color, 1.30);
-                color2:     Qt.darker (background.color, 1.20);
-            }
+            opacity: control.checked ? 1 : 0
 
-            Behavior on shadow.spread {
-                NumberAnimation { duration: 100 }
-            }
+            shadow { radius: width; spread: 5; offset: 4; distance: 2 }
 
-            Rectangle {
-                anchors.centerIn: parent
-                width:  parent.width * 0.7
-                height: width
-
-                visible: control.highlighted
-                color: 'transparent'
-                radius: width/2
-                opacity: 0.5
-                border.color: Qt.tint(control.palette.highlight, "#12ffffff")
-                border.width: width * 0.05
-            }
-
-            RoundedInEffect {
-                x: (parent.width - width)/2
-                y: x
-
-                width:  parent.width * 0.75
-                height: width
-                color: control.palette.button
-
-                opacity: control.checked ? 1 : 0
-
-                shadow {
-                    radius: width
-                    spread: 5
-                    offset: 4
-                    distance: 2
-                }
-
-                Behavior on opacity {
-                    NumberAnimation{ duration: 100 }
-                }
+            Behavior on opacity {
+                NumberAnimation{ duration: 100 }
             }
         }
+    }
 }

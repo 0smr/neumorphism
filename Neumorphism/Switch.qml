@@ -50,13 +50,7 @@ T.Switch {
 
         color: control.palette.button
 
-        shadow {
-            offset: 7
-            radius: width
-            spread: 12
-            distance: 1.0
-            angle: 25
-        }
+        shadow { offset: 7; radius: width; spread: 12; distance: 1.0; angle: 25 }
 
         /*!
          * TODO: add active and visual focus effect
@@ -91,7 +85,7 @@ T.Switch {
             radius: 0.5
             gradient: [
                 GradientColor{color: Qt.lighter(control.palette.button, 1.20); stop: Qt.vector2d(0,0)},
-                GradientColor{color: Qt.darker (control.palette.button, 1.05); stop: Qt.vector2d(1,1)}
+                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.5, 0.5)}
             ]
 
             Behavior on x {
@@ -102,11 +96,11 @@ T.Switch {
     }
 
     contentItem: Text {
-        leftPadding:    control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding:   control.indicator &&  control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
+        rightPadding: control.indicator &&  control.mirrored ? control.indicator.width + control.spacing : 0
         verticalAlignment: Text.AlignVCenter
-        text:           control.text
-        font:           control.font
-        color:          control.palette.buttonText
+        text: control.text
+        font: control.font
+        color: control.palette.buttonText
     }
 }
