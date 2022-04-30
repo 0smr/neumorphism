@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15 as QQC
 import QtGraphicalEffects 1.0
-import Neumorphism 1.0
+import Neumorphism 1.1
 
 QQC.ApplicationWindow {
     id: window
@@ -26,7 +26,7 @@ QQC.ApplicationWindow {
     }
 
     Column {
-        spacing: 10
+        spacing: 25
         anchors.centerIn: parent
 
         AdvancedRectangle {
@@ -108,49 +108,32 @@ QQC.ApplicationWindow {
             }
         }
 
+
         AdvancedRectangle {
             width:  100; height: 100
 
-            color: Qt.darker(window.color, 1.5)
+            property vector4d vec4: Qt.vector4d(0.3,0.1,0.4,0.1)
+
+            color: "#4441a5ee"
             radius: vec4
 
-            property vector4d vec4
+            NumberAnimation on rotation { from: 0; to: 360; loops: -1; duration: 5000 }
 
-            NumberAnimation on rotation {
-                from: 0; to: 360
-                loops: -1
-                duration: 3333
+            SequentialAnimation on vec4.x { loops: -1
+                NumberAnimation { to: 0.5; duration: 1000 }
+                NumberAnimation { to: 0.2; duration: 1000 }
             }
-
-            Component.onCompleted: {
-                radiusAnimation.createObject(this, {})
-                vec4.x = 0.5
-                vec4.y = 0.5
-                vec4.z = 0.5
-                vec4.w = 0.5
+            SequentialAnimation on vec4.y { loops: -1
+                NumberAnimation { to: 0.5; duration: 700 }
+                NumberAnimation { to: 0.4; duration: 1100 }
             }
-        }
-    }
-
-    Component {
-        id: radiusAnimation
-        SequentialAnimation {
-            property real expandDuration: 1500
-            property real collapseDuration: 1500
-            property Item target
-            property string property
-            loops: -1
-            NumberAnimation {
-                target: parent.target
-                property: parent.property
-                from: 0.3; to: 0.6
-                duration: parent.expandDuration
+            SequentialAnimation on vec4.z { loops: -1
+                NumberAnimation { to: 0.5; duration: 1100 }
+                NumberAnimation { to: 0.2; duration: 1200 }
             }
-            NumberAnimation {
-                target: parent.target
-                property: parent.property
-                from: 0.6; to: 0.3
-                duration: parent.collapseDuration
+            SequentialAnimation on vec4.w { loops: -1
+                NumberAnimation { to: 0.5; duration: 700 }
+                NumberAnimation { to: 0.3; duration: 6000 }
             }
         }
     }

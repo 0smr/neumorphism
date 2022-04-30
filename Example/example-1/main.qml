@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15 as QQC
 import QtGraphicalEffects 1.0
 
-import Neumorphism 1.0
+import Neumorphism 1.1
 
 QQC.ApplicationWindow {
     id: window

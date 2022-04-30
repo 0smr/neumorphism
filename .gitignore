@@ -10,4 +10,4 @@ build*
 *.user
 *.autosave
 
-/.vscode
+.vscode
