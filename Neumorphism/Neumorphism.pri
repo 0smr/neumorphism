@@ -1,4 +1,4 @@
-# ls -R -1 **/*.qml | sed 's/^/$$PWD\//' | sed 's/$/ \\/'
+# ls -R1 **/*.qml | sed -e 's/^/    $$PWD\//' | sed -e 's/$/ \\\\/'
 QML_FILES += \
     $$PWD/Base/AdvancedRectangle.qml \
     $$PWD/Base/Border.qml \
@@ -19,7 +19,6 @@ QML_FILES += \
     $$PWD/ProgressBar.qml \
     $$PWD/RadioButton.qml \
     $$PWD/RangeSlider.qml \
-    $$PWD/MultiRangeSlider.qml \
     $$PWD/Slider.qml \
     $$PWD/SpinBox.qml \
     $$PWD/Switch.qml \
@@ -33,25 +32,3 @@ QML_FILES += \
     $$PWD/Dial.qml \
     $$PWD/ComboBox.qml \
     $$PWD/StackView.qml \
-
-HEADERS += \
-    $$PWD/gooeyview.h \
-    $$PWD/gooeyviewplugin.h
-
-SOURCES += \
-    $$PWD/gooeyview.cpp \
-    $$PWD/gooeyviewplugin.cpp
-
-
-
-
-
-
-
-
-
-
-
-
-
-

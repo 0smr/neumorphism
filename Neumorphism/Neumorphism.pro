@@ -1,7 +1,7 @@
-TEMPLATE    = lib
-QT          += qml quick quickcontrols2
-CONFIG      += qt plugin
-TARGET      = gooeyviewplugin
+TEMPLATE = lib
+QT += qml quick quickcontrols2
+CONFIG += qt plugin
+TARGET = gooeyviewplugin
 
 include(Neumorphism.pri)
 
@@ -17,10 +17,3 @@ qmltypes.commands = $$[QT_INSTALL_BINS]/qmlplugindump Neumorphism 1.0 $$QMAKE_RE
 qmltypes.depends = $$QMAKE_RESOLVED_TARGET
 
 QMAKE_EXTRA_TARGETS += qmltypes
-
-InstallPath = $$PWD/../../Install/Neumorphism/
-qmlFiles.path = $$InstallPath
-target.path = $$InstallPath
-
-INSTALLS += target qmlFiles
-#load(qml_plugin)

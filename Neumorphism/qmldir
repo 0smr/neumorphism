@@ -1,9 +1,6 @@
 module Neumorphism
 typeinfo neumorphism.qmltypes
 
-plugin gooeyviewplugin
-classname GooeyViewPlugin
-
 Script                 1.0 script.js
 
 singleton Neumorphism  1.0 Neumorphism.qml
@@ -28,7 +25,6 @@ Label                  1.0 Label.qml
 ProgressBar            1.0 ProgressBar.qml
 RadioButton            1.0 RadioButton.qml
 RangeSlider            1.0 RangeSlider.qml
-MultiRangeSlider       1.0 MultiRangeSlider.qml
 Slider                 1.0 Slider.qml
 SpinBox                1.0 SpinBox.qml
 Switch                 1.0 Switch.qml
