@@ -15,10 +15,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     // Path to module componnents
-    engine.addImportPath(QCoreApplication::applicationDirPath () +
-                         "/../../../../qml-neumorphism/");
-    engine.addPluginPath(QCoreApplication::applicationDirPath () +
-                         "/../../../Neumorphism/debug");
+    engine.addImportPath(QCoreApplication::applicationDirPath () + "/../../../../qml-neumorphism/");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QDir>
 
 #define Q(x) #x
 #define QUOTE(x) Q(x)
@@ -11,7 +12,6 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
     // Path to module componnents
     engine.addImportPath(QCoreApplication::applicationDirPath () + "/../../../../qml-neumorphism");
