@@ -37,10 +37,7 @@ Item {
         width: control.width;
         height: control.height;
 
-        property Shadow shadow: Shadow {
-            radius: 0
-            spread: 0
-        }
+        property Shadow shadow: Shadow { radius: width; spread: 10 }
 
         readonly property vector2d ratio: Qt.vector2d(width / whmax, height / whmax);
         readonly property real whmax: Math.max(width, height);
@@ -52,7 +49,6 @@ Item {
         }
 
         fragmentShader: "
-            #version 330
             varying highp vec2 qt_TexCoord0;
             uniform highp float qt_Opacity;
             uniform highp float radius;
@@ -61,12 +57,12 @@ Item {
             uniform highp vec4 color;
 
             void main() {
-                // ---------------- normalized center and coordinate ----------------
+                // TextCoord is normalized based on item size.
                 highp vec2 center = ratio / 2.0;
                 highp vec2 coord = qt_TexCoord0 * ratio;
-                // ------------------------- color assignment -----------------------
+                // Initial color value.
                 gl_FragColor = color ;
-                // ---------------------- shadow spread and radius ------------------
+                // Creating shadow based on shadow offset and shadow spreads.
                 highp float dist = length(max(abs(center - coord) - center + radius, 0.0)) - radius;
                 gl_FragColor = gl_FragColor * smoothstep(0.0, spread, - dist + 0.001) * qt_Opacity;
             }"

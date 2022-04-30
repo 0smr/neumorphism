@@ -35,12 +35,12 @@ Item {
         width: control.width;
         height: control.height;
 
-        readonly property bool hasgrd: gradient.length > 1;
+        readonly property bool hasGradient: gradient.length > 1;
         readonly property color color: control.color
-        readonly property color c0: hasgrd ? gradient[0].color: "#fff";
-        readonly property color c1: hasgrd ? gradient[1].color: "#fff";
-        readonly property vector2d s0: hasgrd ? gradient[0].stop : Qt.vector2d(0,0);
-        readonly property vector2d s1: hasgrd ? gradient[1].stop : Qt.vector2d(0,0);
+        readonly property color c0: hasGradient ? gradient[0].color: "#fff";
+        readonly property color c1: hasGradient ? gradient[1].color: "#fff";
+        readonly property vector2d s0: hasGradient ? gradient[0].stop : Qt.vector2d(0,0);
+        readonly property vector2d s1: hasGradient ? gradient[1].stop : Qt.vector2d(0,0);
         readonly property vector2d ratio: Qt.vector2d(width / Math.max(width, height),
                                                       height/ Math.max(width, height));
         readonly property vector4d radius: {
@@ -52,6 +52,7 @@ Item {
             }
             else if(typeof control.radius == "object" && whMin > 0) {
                 /*!
+                 * I made advanced rectangle in order to make a rectangle with changeable radiuses and a basic gradient.
                  * radius points,  0 <= x,y,z,w <= 0.5
                  * - vector4d(x, y, z, w):
                  *  ╭───┬───╮
@@ -63,34 +64,30 @@ Item {
                  *  └┘ └┘ └╯ ╰┘
                  *   X  Y  Z  W
                  */
-                return Qt.vector4d(
-                            Math.min(Math.max(control.radius.x, 0.01), whMin),
-                            Math.min(Math.max(control.radius.y, 0.01), whMin),
-                            Math.min(Math.max(control.radius.z, 0.01), whMin),
-                            Math.min(Math.max(control.radius.w, 0.01), whMin),
-                        );
+                return Qt.vector4d(Math.min(Math.max(control.radius.x, 0.01), whMin),
+                                    Math.min(Math.max(control.radius.y, 0.01), whMin),
+                                    Math.min(Math.max(control.radius.z, 0.01), whMin),
+                                    Math.min(Math.max(control.radius.w, 0.01), whMin));
             }
             else {
                 return Qt.vector4d(0.0,0.0,0.0,0.0);
             }
         }
         /**
-         * TODO: allow variant radiuses tobe more than 0.5.
-         * NOTE: to doing this, must bind Y to radius center point.
+         * TODO: Allow radius variants to be more than 0.5, To do so, tie Y to the radius center point.
          *  ╭───┬─┐
          *  │ Y │ │
          *  ├───┼─┤
          *  └───┴─┘
-         * NOTE: GLSL work without "mod" function in at this code "lowp int area = int(mod(-atan(", and I don't know why?!
-         * there is no overflow here?
+         * BUG: I'm not sure why, but GLSL works without the "mod" function in this code "lowp int area = int(mod(-atan(", and I'm not sure why?!
+         * Isn't there any overflow here?
          */
 
         fragmentShader: "
-            #version 330
             uniform highp float qt_Opacity;
             varying highp vec2 qt_TexCoord0;
             uniform highp vec2 ratio;
-            uniform mediump bool hasgrd;
+            uniform lowp bool hasGradient;
             uniform highp vec4 radius;
             uniform highp vec4 color;
             uniform highp vec4 c0;
@@ -99,27 +96,25 @@ Item {
             uniform highp vec2 s1;
 
             void main() {
-                // ---------------- normalized size and coordinate ----------------
+                // TextCoord is normalized based on item size.
                 highp vec2 center = ratio / 2.0;
                 highp vec2 coord = ratio * qt_TexCoord0;
                 highp vec2 s0 = s0 * ratio;
                 highp vec2 s1 = s1 * ratio;
-
-                // ------------------------ color gradient ------------------------
-                if(hasgrd) {
+                // This part sets the gradient color if one exists; otherwise, it just sets the color.
+                if(hasGradient) {
                     highp float d = distance(s0,s1);
                     highp float angle = (s0.x - s1.x)/((s1.y - s0.y) == 0.0 ? 0.001 : s1.y - s0.y);
-                    highp float line = angle * (coord.x - (s0.x+s1.x) / 2 ) + (s0.y + s1.y) / 2 - coord.y;
+                    highp float line = angle * (coord.x - (s0.x+s1.x) / 2 ) + (s0.y + s1.y) / 2.0 - coord.y;
                     highp float dist = line / sqrt(angle * angle + 1.0);
                     highp float rotflag = (s0.y > s1.y) ? -1.0 : 1.0;
-                    gl_FragColor = mix(c1, c0, smoothstep(0.0, 2 * d, rotflag * dist + d));
+                    gl_FragColor = mix(c1, c0, smoothstep(0.0, 2.0 * d, rotflag * dist + d));
                 } else {
                     gl_FragColor = color ;
                 }
-
-                // ------------------------- border radius -------------------------
+                // Create border radius.
                 highp float radius[4] = float[4](radius.x, radius.y, radius.z, radius.w);
-                highp int area = int(mod(-atan(coord.x - center.x, coord.y - center.y) * 0.636 + 3,4));
+                highp int area = int(mod(-atan(coord.x - center.x, coord.y - center.y) * 0.636 + 3, 4.0));
                 highp float dist = length(max(abs(center - coord) - center + radius[area], 0.0)) - radius[area];
                 gl_FragColor = gl_FragColor * smoothstep(0.0, 0.01, - dist + 0.001) * qt_Opacity;
             }"
