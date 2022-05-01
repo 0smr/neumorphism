@@ -12,16 +12,14 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 
 ## Preview
 
-<center>
+<div align="center">
 
 <img src="https://img.shields.io/badge/light purple-e8f0fb">
-<img src="https://img.shields.io/badge/light   gray-ebe5ec">
+<img src="https://img.shields.io/badge/light   gray-ebe5ec"><br>
 
-<img src="Extera/Preview/preview-1.webp" width="48%">
-<img src="Extera/Preview/preview-2.webp" width="48%">
-</center>
-
----
+<img src="Extera/Preview/preview-1.webp" width="45%">
+<img src="Extera/Preview/preview-2.webp" width="45%">
+</div>
 
 ## How to use
 ### Attention!
@@ -34,6 +32,7 @@ Then, in your qml file, add `import "path/to/resource"` to use them.
 
 #### **Use as a module**
 You may also copy the `Neumorphism/` directory to any location and include it in `engine.addImportPath` and `QML_IMPORT_PATH` in your qmake file.<br>
+Then import it to your qml file.
 ```make
 QML_IMPORT_PATH += "C:/Neumorphism/"
 ```
@@ -43,12 +42,11 @@ engine.addImportPath("C:/Neumorphism/");
 ```qml
 import Neumorphism 1.1
 ```
-Alternatively, copy the `Neumorphism/` directory to the Qt qml component directory.
-And import it to your qml file.
+Alternatively, copy the `Neumorphism/` directory to the Qt qml component directory.<br>
+Then, similarly to the previous method, import it into your qml file.
 ```qml
 import Neumorphism 1.1
 ```
----
 
 ## Components
 <details>
@@ -72,6 +70,7 @@ import Neumorphism 1.1
 - [x] BusyIndicator
 - [x] SplitView
 - [x] StackView
+- [x] ComboBox
 
 </details>
 
@@ -82,18 +81,12 @@ import Neumorphism 1.1
 
 </details>
 
----
-
 ## Issues
 
 Please file an issue on [issues page](https://github.com/SMR76/qml-neumorphism/) if you have any problems.
 
----
-
 ## Documentation
 no document provided yet.
-
----
 
 ## Donation
 &emsp;  <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
