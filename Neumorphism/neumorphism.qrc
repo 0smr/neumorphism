@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/Neumorphism">
+        <file>Base/AdvancedRectangle.qml</file>
+        <file>Base/Border.qml</file>
+        <file>Base/BoxShadow.qml</file>
+        <file>Base/GradientColor.qml</file>
+        <file>Base/RoundedInEffect.qml</file>
+        <file>Base/RoundedOutEffect.qml</file>
+        <file>Base/Shadow.qml</file>
+        <file>Base/DashedRing.qml</file>
+        <file>Base/DashedRect.qml</file>
+        <file>Base/Handler.qml</file>
+        <file>Base/Wave.qml</file>
+        <file>Button.qml</file>
+        <file>CheckBox.qml</file>
+        <file>Label.qml</file>
+        <file>Neumorphism.qml</file>
+        <file>ProgressBar.qml</file>
+        <file>RadioButton.qml</file>
+        <file>RangeSlider.qml</file>
+        <file>Slider.qml</file>
+        <file>SpinBox.qml</file>
+        <file>Switch.qml</file>
+        <file>TextArea.qml</file>
+        <file>TextField.qml</file>
+        <file>Tumbler.qml</file>
+        <file>HorizontalSeprator.qml</file>
+        <file>BusyIndicator.qml</file>
+        <file>SplitView.qml</file>
+        <file>Frame.qml</file>
+        <file>Dial.qml</file>
+        <file>ComboBox.qml</file>
+        <file>StackView.qml</file>
+        <file>qmldir</file>
+        <file>script.js</file>
+    </qresource>
+</RCC>
