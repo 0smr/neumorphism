@@ -4,6 +4,5 @@
         <file>qtquickcontrols2.conf</file>
         <file>ColorPicker.qml</file>
         <file>CustomSlider.qml</file>
-        <file>resources/icofont.ttf</file>
     </qresource>
 </RCC>

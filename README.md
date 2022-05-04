@@ -1,5 +1,5 @@
 # QML Neumorphism (soft UI) QtQuick style.
-<img src="https://img.shields.io/badge/version-1.1.0-37c248"><br>
+<img src="https://img.shields.io/badge/version-1.1.1-37c248"><br>
 
 Start developing *Neumorphic QtQuick* applications using Neumorphism UI.<br>
 The Neumorphic design concept has been applied to all of the components.
@@ -26,27 +26,24 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 This component has only been tested on *Qt version 5.15.2* and *Windows OS* at *3840x2160 resolution* with a *scaling factor of 250 percent*; usage of this component carries no ***warranty***.
 
 ### Usage
-#### **Simple usage**
-Components from the `Neumorphism/` directory can be included in your project's resources.
-Then, in your qml file, add `import "path/to/resource"` to use them.
-
-#### **Use as a module**
-You may also copy the `Neumorphism/` directory to any location and include it in `engine.addImportPath` and `QML_IMPORT_PATH` in your qmake file.<br>
-Then import it to your qml file.
+Clone the repository first.
+```bash
+git clone https://github.com/SMR76/qml-neumorphism.git
+```
+Then include `Neumorphism.pri` in your project. <sub>[see example-1](Example/example-1/example-1.pro#L11)</sub>
 ```make
-QML_IMPORT_PATH += "C:/Neumorphism/"
+include('path/to/Neumorphism.pri')
 ```
+Add `qrc:/` to the engine import path. <sub>[see example-1](Example/example-1/main.cpp#L12)</sub>
 ```cpp
-engine.addImportPath("C:/Neumorphism/");
+engine.addImportPath("qrc:/");
 ```
+And finally import the `Neumorphism` module. <sub>[see example-1](Example/example-1/main.qml#L5)</sub>
 ```qml
 import Neumorphism 1.1
 ```
-Alternatively, copy the `Neumorphism/` directory to the Qt qml component directory.<br>
-Then, similarly to the previous method, import it into your qml file.
-```qml
-import Neumorphism 1.1
-```
+
+If you are confused, please refer to [Example-1](Example/example-1/) for a clearer understanding of what you should do.
 
 ## Components
 <details>

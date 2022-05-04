@@ -1,21 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QDir>
-
-#define Q(x) #x
-#define QUOTE(x) Q(x)
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
-    // Path to module componnents
-    engine.addImportPath(QCoreApplication::applicationDirPath () + "/../../../../qml-neumorphism/");
+    // Path to module.
+    engine.addImportPath("qrc:/");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
