@@ -3,48 +3,42 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-import Neumorphism 1.1 as N
+import Neumorphism 1.2
 
 ApplicationWindow {
     id: window
 
-    width: 200
-    height: 320
+    width: 420
+    height: 300
     visible: true
     color: "#f0f0f0"
+    title: 'example-4'
 
     Column {
         padding: 0
         spacing: 10
-        anchors.fill: parent
+        anchors.centerIn: parent
 
-        N.ComboBox {
-            model: ['a', 'b', 'b', 'b', 'b', 'b']
-            palette.button: window.color
-        }
+        NeumorphismView {
+            id: neumorphismView
 
-        ComboBox {
-            id: combobox
-            model: model
-            palette.button: window.color
-            displayText: model[highlightedIndex]
+            shadow.angle: 65
 
-            delegate: ItemDelegate {
-                width: ListView.view.width
-                text: name
-                palette.highlightedText: combobox.palette.highlightedText
-                hoverEnabled: combobox.hoverEnabled
-                background: Rectangle {
-                    color: combobox.highlightedIndex === index ? combobox.palette.highlight : combobox.palette.button
-                }
+            contentItem: Text {
+                text: 'Neum'
+                font.pixelSize: 85
+                font.bold: true
+                color: '#eee'
             }
         }
 
-        ListModel {
-            id: model
-            ListElement { name: "A"; family: "A"}
-            ListElement { name: "B"; family: "B"}
-            ListElement { name: "C"; family: "C"}
+        Text {
+            id: combobox
+            text: 'neumorphism view will create two shadows behind\n' +
+                  'the any Items which placed in contentItem to create a neumprphism effect.';
+            width: parent.width
+            color: '#666'
+            horizontalAlignment: Text.AlignHCenter
         }
     }
 }

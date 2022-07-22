@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15 as QQC
 
-import Neumorphism 1.1
+import Neumorphism 1.2
 
 QQC.ApplicationWindow {
     id: window

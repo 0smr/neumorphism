@@ -17,6 +17,8 @@ GradientColor          1.0 Base/GradientColor.qml
 DashedRing             1.0 Base/DashedRing.qml
 DashedRect             1.0 Base/DashedRect.qml
 Wave                   1.0 Base/Wave.qml
+NeumorphismView        1.2 Base/NeumorphismView.qml
+FastShadow             1.2 Base/FastShadow.qml
 
 Button                 1.0 Button.qml
 BusyIndicator          1.0 BusyIndicator.qml

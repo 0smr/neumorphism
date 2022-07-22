@@ -1,5 +1,5 @@
 # QML Neumorphism (soft UI) QtQuick style.
-<img src="https://img.shields.io/badge/version-1.1.1-37c248"><br>
+<img src="https://img.shields.io/badge/version-1.2.0-37c248"><br>
 
 Start developing *Neumorphic QtQuick* applications using Neumorphism UI.<br>
 The Neumorphic design concept has been applied to all of the components.
@@ -17,8 +17,8 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 <img src="https://img.shields.io/badge/light purple-e8f0fb">
 <img src="https://img.shields.io/badge/light   gray-ebe5ec"><br>
 
-<img src="Extera/Preview/preview-1.webp" width="45%">
-<img src="Extera/Preview/preview-2.webp" width="45%">
+<img src="Extra/Preview/preview-1.webp" width="45%">
+<img src="Extra/Preview/preview-2.webp" width="45%">
 </div>
 
 ## How to use
@@ -40,13 +40,13 @@ engine.addImportPath("qrc:/");
 ```
 And finally import the `Neumorphism` module. <sub>[see example-1](Example/example-1/main.qml#L5)</sub>
 ```qml
-import Neumorphism 1.1
+import Neumorphism 1.2
 ```
 
 If you are confused, please refer to [Example-1](Example/example-1/) for a clearer understanding of what you should do.
 
 ## Components
-<details>
+<details open>
 <summary> Available</summary>
 
 - [x] Button
@@ -55,7 +55,7 @@ If you are confused, please refer to [Example-1](Example/example-1/) for a clear
 - [x] AdvancedRectangle
 - [x] Slider
 - [x] TextArea
-- [x] TextField 
+- [x] TextField
 - [x] ProgressBar
 - [x] RadioButton
 - [x] Switch
@@ -68,15 +68,13 @@ If you are confused, please refer to [Example-1](Example/example-1/) for a clear
 - [x] SplitView
 - [x] StackView
 - [x] ComboBox
+- [x] Custom Neumorphic shape
 
 </details>
 
-<details open>
+<!-- <details open>
 <summary> Pending</summary>
-
-- [ ] Custom styled text
-
-</details>
+</details> -->
 
 ## Issues
 
@@ -86,9 +84,9 @@ Please file an issue on [issues page](https://github.com/SMR76/qml-neumorphism/)
 no document provided yet.
 
 ## Donation
-&emsp;  <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
-        <img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e"></a>
+&emsp; <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
+       <img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e"></a>
 
 ## License
-&emsp;  <a href="https://choosealicense.com/licenses/gpl-3.0/">
-        <img src="https://img.shields.io/badge/license-LGPLv3-37c248"></a>
+&emsp; <a href="https://choosealicense.com/licenses/gpl-3.0/">
+       <img src="https://img.shields.io/badge/license-LGPLv3-37c248"></a>

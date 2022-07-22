@@ -11,6 +11,8 @@
         <file>Base/DashedRect.qml</file>
         <file>Base/Handler.qml</file>
         <file>Base/Wave.qml</file>
+        <file>Base/NeumorphismView.qml</file>
+        <file>Base/FastShadow.qml</file>
         <file>Button.qml</file>
         <file>CheckBox.qml</file>
         <file>Label.qml</file>
@@ -33,5 +35,6 @@
         <file>StackView.qml</file>
         <file>qmldir</file>
         <file>script.js</file>
+        <file>Base/NeumView.qml</file>
     </qresource>
 </RCC>
