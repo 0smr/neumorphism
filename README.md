@@ -1,5 +1,8 @@
 # QML Neumorphism (soft UI) QtQuick style.
-<img src="https://img.shields.io/badge/version-1.2.0-37c248"><br>
+<p><img src="https://img.shields.io/github/v/tag/smr76/qml-neumorphism?sort=semver&label=version&labelColor=0bd&color=07b" alt="version tag">
+<img src="https://img.shields.io/github/license/smr76/qml-neumorphism?color=36b245" alt="license">
+<a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
+<img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e" alt="BCH donate"></a></p>
 
 Start developing *Neumorphic QtQuick* applications using Neumorphism UI.<br>
 The Neumorphic design concept has been applied to all of the components.
@@ -13,17 +16,16 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 ## Preview
 
 <div align="center">
-
 <img src="https://img.shields.io/badge/light purple-e8f0fb">
-<img src="https://img.shields.io/badge/light   gray-ebe5ec"><br>
-
+<img src="https://img.shields.io/badge/light gray-ebe5ec">&ensp;<br>
 <img src="Extra/Preview/preview-1.webp" width="45%">
 <img src="Extra/Preview/preview-2.webp" width="45%">
 </div>
 
 ## How to use
-### Attention!
-This component has only been tested on *Qt version 5.15.2* and *Windows OS* at *3840x2160 resolution* with a *scaling factor of 250 percent*; usage of this component carries no ***warranty***.
+> **Warning**<br>
+> This components hava only been tested on **Qt version 5.15.2** and *Windows OS* at *3840x2160 resolution* with a *scaling factor of 250 percent*; ***USAGE OF THIS COMPONENTS CARRIES NO WARRANTY***.
+> <br>&nbsp;
 
 ### Usage
 Clone the repository first.
@@ -52,7 +54,6 @@ If you are confused, please refer to [Example-1](Example/example-1/) for a clear
 - [x] Button
 - [x] Radio Button
 - [x] CheckBox
-- [x] AdvancedRectangle
 - [x] Slider
 - [x] TextArea
 - [x] TextField
@@ -61,13 +62,15 @@ If you are confused, please refer to [Example-1](Example/example-1/) for a clear
 - [x] Switch
 - [x] RangeSlider
 - [x] SpinBox
-- [x] HorizontalSeparator
 - [x] Tumbler
 - [x] Dial
 - [x] BusyIndicator
 - [x] SplitView
 - [x] StackView
 - [x] ComboBox
+---
+- [x] AdvancedRectangle
+- [x] HorizontalSeparator
 - [x] Custom Neumorphic shape
 
 </details>
@@ -82,11 +85,3 @@ Please file an issue on [issues page](https://github.com/SMR76/qml-neumorphism/)
 
 ## Documentation
 no document provided yet.
-
-## Donation
-&emsp; <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
-       <img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e"></a>
-
-## License
-&emsp; <a href="https://choosealicense.com/licenses/gpl-3.0/">
-       <img src="https://img.shields.io/badge/license-LGPLv3-37c248"></a>
