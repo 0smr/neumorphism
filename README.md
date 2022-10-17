@@ -27,7 +27,7 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 > This components hava only been tested on **Qt version 5.15.2** and *Windows OS* at *3840x2160 resolution* with a *scaling factor of 250 percent*; ***USAGE OF THIS COMPONENTS CARRIES NO WARRANTY***.
 > <br>&nbsp;
 
-### Usage
+### Usage (Qmake)
 Clone the repository first.
 ```bash
 git clone https://github.com/SMR76/qml-neumorphism.git
@@ -35,6 +35,31 @@ git clone https://github.com/SMR76/qml-neumorphism.git
 Then include `Neumorphism.pri` in your project. <sub>[see example-1](Example/example-1/example-1.pro#L11)</sub>
 ```make
 include('path/to/Neumorphism.pri')
+```
+Add `qrc:/` to the engine import path. <sub>[see example-1](Example/example-1/main.cpp#L12)</sub>
+```cpp
+engine.addImportPath("qrc:/");
+```
+And finally import the `Neumorphism` module. <sub>[see example-1](Example/example-1/main.qml#L5)</sub>
+```qml
+import Neumorphism 1.2
+```
+### Usage (CMake)
+Clone the repository first.
+```bash
+git clone https://github.com/SMR76/qml-neumorphism.git
+```
+Then include `Neumorphism.pri` in your project. <sub>[see example-1](Example/example-1/example-1.pro#L11)</sub>
+```make
+include_directories('path/to/Neumorphism')
+file(GLOB_RECURSE Neumorphism_SOURCES path/to/Neumorphism/*.*)
+
+set(PROJECT_SOURCES
+        main.cpp
+        qml.qrc
+        ${Neumorphism_SOURCES}
+)
+
 ```
 Add `qrc:/` to the engine import path. <sub>[see example-1](Example/example-1/main.cpp#L12)</sub>
 ```cpp
