@@ -1,24 +1,6 @@
-/****************************************************************************
-** Copyright (C) 2021 smr.
-** Contact: http://s-m-r.ir
-**
-** This file is part of the SMR Neumorphism Toolkit.
-**
-** GNU Lesser General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU Lesser
-** General Public License version 3 as published by the Free Software
-** Foundation and appearing in the file LICENSE.LGPLv3 included in the
-** packaging of this file.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-**
-** Please review the following information to
-** ensure the GNU Lesser General Public License version 3 requirements
-** will be met: https://www.gnu.org/licenses/lgpl.html.
-**
-****************************************************************************/
+// Copyright (C) 2022 smr.
+// SPDX-License-Identifier: MIT
+// https://smr76.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
@@ -35,8 +17,6 @@ T.Tumbler {
         bold: true
         pixelSize: 12
     }
-
-    palette.text: "gray"
 
     property real xrad: gapsize / 2 + 0.18 ;
     property real gapsize: implicitContentWidth / control.width;
@@ -81,7 +61,6 @@ T.Tumbler {
         readonly property real _gapsize: control.gapsize/2;
 
         fragmentShader: "
-            #version 330
             varying highp vec2 qt_TexCoord0;
             uniform highp float qt_Opacity;
             uniform highp float _xrad;

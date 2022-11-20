@@ -35,6 +35,6 @@
         <file>StackView.qml</file>
         <file>qmldir</file>
         <file>script.js</file>
-        <file>Base/NeumView.qml</file>
+        <file>Base/NeumorphismView.qml</file>
     </qresource>
 </RCC>
