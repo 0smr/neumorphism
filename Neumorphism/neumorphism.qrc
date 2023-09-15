@@ -1,12 +1,11 @@
 <RCC>
     <qresource prefix="/Neumorphism">
-        <file>Base/BoxShadow.qml</file>
-        <file>Base/NeumEffect.qml</file>
-        <file>Base/DashedRing.qml</file>
-        <file>Base/NeumorphismView.qml</file>
-        <file>Base/FastShadow.qml</file>
-        <file>Base/Sphere.qml</file>
-        <file>Base/NeumorphismView.qml</file>
+        <file>base/BoxShadow.qml</file>
+        <file>base/NeumEffect.qml</file>
+        <file>base/DashedRing.qml</file>
+        <file>base/NeumorphismView.qml</file>
+        <file>base/FastShadow.qml</file>
+        <file>base/Sphere.qml</file>
         <file>Button.qml</file>
         <file>CheckBox.qml</file>
         <file>Label.qml</file>
