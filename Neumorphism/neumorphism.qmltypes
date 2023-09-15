@@ -8,16 +8,10 @@ import QtQuick.tooling 1.2
 
 Module {
     dependencies: [
-        "QtGraphicalEffects 1.12",
         "QtQml 2.15",
         "QtQml.Models 2.15",
-        "QtQml.WorkerScript 2.15",
         "QtQuick 2.15",
         "QtQuick.Controls 2.15",
-        "QtQuick.Controls.Fusion 2.15",
-        "QtQuick.Controls.Imagine 2.15",
-        "QtQuick.Controls.Material 2.15",
-        "QtQuick.Controls.Universal 2.15",
         "QtQuick.Templates 2.15",
         "QtQuick.Window 2.2"
     ]

@@ -1,6 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 
 import QtQuick 2.15
@@ -19,115 +19,56 @@ T.RangeSlider {
 
     padding: 6
 
-    /**
-     * FIXME: there are no active mouse focus for handles.
-     * TODO: move handles to seprate componnent.
-     */
+    component Handle: T.Control {
+        property real pos: 0
 
-    first.handle: T.Control {
-        x: control.leftPadding + (control.horizontal ? control.first.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
-        y: control.topPadding + (control.horizontal ? (control.availableHeight - height) / 2 : control.first.visualPosition * (control.availableHeight - height))
+        x: control.leftPadding + (control.horizontal ? pos * (control.availableWidth - width) : (control.availableWidth - width) / 2)
+        y: control.topPadding  + (control.horizontal ? (control.availableHeight - height) / 2 : pos * (control.availableHeight - height))
 
-        implicitWidth:  20
+        implicitWidth: 20
         implicitHeight: 20
 
-        width:  implicitWidth * (visualFocus ? 1.0 : 0.8)
-        height: width
+        width: implicitWidth; height: width
 
-        Behavior on width { NumberAnimation{ duration: 200} }
+        rightInset: -2
+        bottomInset: -2
 
-        BoxShadow {
-            x: -1.5
-            y: -1.5
-            width: ibox2.width * 1.4
-            height: width
-            color: '#66000000'
+        Behavior on padding { NumberAnimation{ duration: 100} }
 
-            shadow {
-                radius: width/2
-                spread: 10 + (first.pressed ? 2 : 6)
-            }
-
-            Behavior on shadow.spread { NumberAnimation{ duration: 100} }
+        contentItem: Sphere {
+            dark: Qt.darker(control.palette.button, 1.3)
+            light: Qt.lighter(control.palette.button, 1.9 - control.palette.button.hslLightness)
+            dist: 2.5
         }
 
-        AdvancedRectangle {
-            id: ibox
-            width:  parent.width
-            height: parent.height
-
-            radius: 0.5
-
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.3); stop: Qt.vector2d(0,0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(1,1)}
-            ]
+        background: BoxShadow {
+            color: Qt.darker(control.palette.button, 1.3)
+            radius: width
+            spread: width/2
         }
     }
 
-    second.handle: T.Control {
-        x: control.leftPadding + (control.horizontal ? control.second.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
-        y: control.topPadding  + (control.horizontal ? (control.availableHeight - height) / 2 : control.second.visualPosition * (control.availableHeight - height))
+    first.handle: Handle { pos: control.first.visualPosition }
+    second.handle: Handle { pos: control.second.visualPosition }
 
-        implicitWidth:   20
-        implicitHeight:  20
+    background: NeumEffect {
+        implicitWidth: 200
+        implicitHeight: 30
 
-        width:  implicitWidth * (visualFocus ? 1.0 : 0.8)
-        height: width
-
-        Behavior on width { NumberAnimation{ duration: 200} }
-
-        BoxShadow {
-            x: -1.5
-            y: -1.5
-            width: ibox2.width * 1.4
-            height: width
-            color: '#66000000'
-
-            shadow {
-                radius: width/2
-                spread: 10 + (first.pressed ? 2 : 6)
-            }
-
-            Behavior on shadow.spread { NumberAnimation{ duration: 100} }
-        }
-
-        AdvancedRectangle {
-            id: ibox2
-            width: parent.width
-            height: parent.height
-
-            radius: 0.5
-
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.2); stop: Qt.vector2d(0,0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(1,1)}
-            ]
-        }
-    }
-
-    background: RoundedInEffect {
-        x: (control.width   - width) / 2
-        y: (control.height  - height) / 2
-
-        implicitWidth:  control.horizontal ? 200 : 10
-        implicitHeight: control.horizontal ? 10 : 200
+        padding: 3
 
         color: control.palette.button
+        dark: Qt.darker(color, 1.5)
+        light: Qt.lighter(color, 1.5)
 
-        /*!
-         * FIXME: binding loop error when use implicitHeight to feed height.
-         * TODO: add mirror state.
-         */
-        width:  control.horizontal ? control.availableWidth : implicitWidth
-        height: control.horizontal ? 10 : control.availableHeight
+        radius: height
+        inward: true
 
-        shadow {
-            radius: width
-            offset: 6
-            spread: 10
-            distance: 0.05
-            angle:  control.horizontal ? 0.00 : 90.0
-        }
+        opacity: 1 - color.hslLightness * 0.8
+
+        pad: 15
+        angle: Math.atan((availableHeight - pad)/(availableWidth - pad)) * 57.295
+        blend: spread
+        spread: availableHeight/2
     }
 }

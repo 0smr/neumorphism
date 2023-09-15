@@ -1,6 +1,6 @@
 # QML Neumorphism (soft UI) QtQuick style.
-<p><img src="https://img.shields.io/github/v/tag/smr76/qml-neumorphism?sort=semver&label=version&labelColor=0bd&color=07b" alt="version tag">
-<img src="https://img.shields.io/github/license/smr76/qml-neumorphism?color=36b245" alt="license">
+<p><img src="https://img.shields.io/github/v/tag/0smr/qml-neumorphism?sort=semver&label=version&labelColor=0bd&color=07b" alt="version tag">
+<img src="https://img.shields.io/github/license/0smr/qml-neumorphism?color=36b245" alt="license">
 <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
 <img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e" alt="BCH donate"></a></p>
 
@@ -30,7 +30,7 @@ Also I used `ShaderEffect` for drop shadows, so there may be a few computational
 ### Usage
 Clone the repository first.
 ```bash
-git clone https://github.com/SMR76/qml-neumorphism.git
+git clone https://github.com/0smr/qml-neumorphism.git
 ```
 Then include `Neumorphism.pri` in your project. <sub>[see example-1](Example/example-1/example-1.pro#L11)</sub>
 ```make
@@ -42,7 +42,7 @@ engine.addImportPath("qrc:/");
 ```
 And finally import the `Neumorphism` module. <sub>[see example-1](Example/example-1/main.qml#L5)</sub>
 ```qml
-import Neumorphism 1.2
+import Neumorphism 1.3
 ```
 
 If you are confused, please refer to [Example-1](Example/example-1/) for a clearer understanding of what you should do.
@@ -67,12 +67,11 @@ If you are confused, please refer to [Example-1](Example/example-1/) for a clear
 - [x] StackView
 - [x] ComboBox
 ---
-- [x] HorizontalSeparator
 - [x] Custom Neumorphic shape
 
 ## Issues
 
-Please file an issue on [issues page](https://github.com/SMR76/qml-neumorphism/) if you have any problems.
+Please file an issue on [issues page](https://github.com/0smr/qml-neumorphism/) if you have any problems.
 
 ## Documentation
 

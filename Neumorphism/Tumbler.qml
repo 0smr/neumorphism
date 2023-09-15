@@ -1,6 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
@@ -13,10 +13,8 @@ T.Tumbler {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
-    font {
-        bold: true
-        pixelSize: 12
-    }
+    font.bold: true
+    font.pixelSize: 12
 
     property real xrad: gapsize / 2 + 0.18 ;
     property real gapsize: implicitContentWidth / control.width;
@@ -65,15 +63,14 @@ T.Tumbler {
             uniform highp float qt_Opacity;
             uniform highp float _xrad;
             uniform highp float _gapsize;
-            uniform highp vec2 ratio;
             uniform mediump vec4 _shade;
             uniform mediump vec4 _highlight;
 
             void main() {
-                highp vec2 coord = qt_TexCoord0 - vec2(0.5);
-                highp float h = smoothstep(0, 0.20, -abs(coord.x) + _xrad);
-                highp float v = smoothstep(0, 0.50, -abs(coord.y) + 0.58);
-                highp float gap = smoothstep(0, 0.01, abs(coord.x) - _gapsize);
+                highp vec2 coord = 2. * qt_TexCoord0 - 1.0;
+                highp float h = smoothstep(0.0, 0.20, -abs(coord.x) + _xrad);
+                highp float v = smoothstep(0.0, 0.50, -abs(coord.y) + 0.58);
+                highp float gap = smoothstep(0.0, 0.01, abs(coord.x) - _gapsize);
                 highp vec4 color = qt_TexCoord0.x > 0.5 ? _shade : _highlight;
                 gl_FragColor = color * h * v * gap * qt_Opacity;
             }"

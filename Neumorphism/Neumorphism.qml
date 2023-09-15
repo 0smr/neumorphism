@@ -1,14 +1,11 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 pragma Singleton
 import QtQuick 2.15
 
 QtObject {
-    property color color:   '#f5f5f5';
-    property color accent:  '#7DC4FF';
-
     function blend(color1, color2, alpha) {
         var color = color1;
         color.r = (color.r + color2.r) / 2;
@@ -29,5 +26,10 @@ QtObject {
 
     function invertColor(color) {
         return Qt.rgba(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0);
+    }
+
+    function alpha(color: color, alpha: real) {
+        const {r,g,b} = color;
+        return Qt.rgba(r, g, b, alpha);
     }
 }

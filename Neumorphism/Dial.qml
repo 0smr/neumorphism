@@ -1,11 +1,11 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
-import QtQuick.Controls 2.15
-import Neumorphism 1.0
+
+import Neumorphism 1.3
 
 T.Dial {
     id: control
@@ -15,18 +15,6 @@ T.Dial {
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
-
-    background: RoundedOutEffect {
-        implicitWidth: 184
-        implicitHeight: 184
-
-        shadow {
-            offset: 8
-            radius: width
-            spread: control.enabled ? 8 : 12
-            distance: 1.0
-        }
-    }
 
     handle: DashedRing {
         id: dashRing
@@ -38,7 +26,7 @@ T.Dial {
         borderWidth: 2
         dashWidth: 2
         dashCount: 51
-        palette.base: Qt.darker(control.palette.button, 1.3)
+        palette.base: control.palette.buttonText
         rotation: control.angle * 1.07
 
         Rectangle {
@@ -47,5 +35,17 @@ T.Dial {
             width: 1; height: 5
             color: parent.palette.base
         }
+    }
+
+    background: NeumEffect { /// Rounded Out {
+        implicitWidth: 184
+        implicitHeight: 184
+
+        color: control.palette.button
+        dark: Qt.darker(color, 1.5)
+        light: Qt.lighter(color, 1.5)
+
+        opacity: 1 - color.hslLightness * 0.8
+        blend: 35; spread: 8; pad: 10; angle: 225; radius: width
     }
 }

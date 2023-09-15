@@ -1,6 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15  as T
@@ -15,13 +15,12 @@ T.Frame {
 
     padding: 12
 
-    background: RoundedOutEffect {
+    background: NeumEffect { /// Rounded Out {
         color: control.palette.button
-        shadow {
-            offset: 3
-            spread: 5
-            radius: 5
-            distance: 0.1
-        }
+        dark: Qt.darker(color, 1.5)
+        light: Qt.lighter(color, 1.5)
+
+        angle: Math.atan((height - pad)/(width - pad)) * 57.295 + 180
+        radius: 5; pad: 5; blend: 15; spread: 10 + control.pressed * -2
     }
 }

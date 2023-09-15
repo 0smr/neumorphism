@@ -1,11 +1,12 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15
-import Neumorphism 1.0
+
+import Neumorphism 1.3
 
 T.Button {
     id: control
@@ -24,16 +25,17 @@ T.Button {
 
     display: AbstractButton.TextOnly
 
-    palette.buttonText: 'gray'
-
     contentItem: Item {
         Grid {
-            anchors.centerIn: parent
+            x: (parent.width - width)/2
+            y: (parent.height - height)/2
+
             spacing: control.display == AbstractButton.TextOnly ||
                      control.display == AbstractButton.IconOnly ? 0 : control.spacing
 
-            flow: control.display == AbstractButton.TextUnderIcon ?
-                      Grid.TopToBottom : Grid.LeftToRight
+            rows: control.display == AbstractButton.TextUnderIcon ? 1 : -1
+            columns: -rows
+
             layoutDirection: control.mirrored ? Qt.RightToLeft : Qt.LeftToRight
 
             opacity: control.down || control.checked ? 0.8 : 1.0
@@ -56,7 +58,7 @@ T.Button {
         }
     }
 
-    background: RoundedOutEffect {
+    background: NeumEffect {
         id: background
         visible: control.enabled && !control.flat
 
@@ -64,49 +66,47 @@ T.Button {
         implicitHeight: 50
 
         color: control.palette.button
+        dark: Qt.darker(color, 1.5)
+        light: Qt.lighter(color, 1.5)
 
-        shadow {
-            radius: width;
-            offset: 7;
-            spread: control.down || control.checked ? 13: 9;
-            distance: 1.00;
-            angle: 45.0;
-            color1: Qt.lighter(background.color, 1.30);
-            color2: Qt.darker(background.color, 1.20);
-        }
+        angle: Math.atan((height - pad)/(width - pad)) * 57.295 + 180
+        radius: 5; pad: 5; blend: 15; spread: 7 - 1.5 * control.pressed
 
-        Behavior on shadow.spread {
-            NumberAnimation { duration: 100 }
-        }
+        Behavior on spread { NumberAnimation { duration: 50 } }
 
         Rectangle {
-            anchors.centerIn: parent
-            width:  parent.width * 0.7
+            x: (parent.width - width)/2
+            y: (parent.height - height)/2
+
+            width:  parent.width - 10
             height: width
 
             visible: control.highlighted
             color: 'transparent'
-            radius: width/2
+            radius: 6
             opacity: 0.5
             border.color: Qt.tint(control.palette.highlight, "#12ffffff")
-            border.width: width * 0.05
         }
 
-        RoundedInEffect {
-            x: (parent.width - width)/2
-            y: x
+        NeumEffect {
+            padding: 1
+            x: 5; y: x
 
-            width: parent.width * 0.75
-            height: width
+            width: parent.width - 10; height: parent.height - 10
+
             color: control.palette.button
+            dark: Qt.darker(color, 1.5)
+            light: Qt.lighter(color, 1.5)
 
-            opacity: control.checked ? 1 : 0
+            visible: spread
 
-            shadow { radius: width; spread: 5; offset: 4; distance: 2 }
+            radius: 3
+            inward: true
+            opacity: 0.3
+            angle: parent.angle + 180 - 2
+            blend: 8; pad: 5; spread: 4 * control.checked
 
-            Behavior on opacity {
-                NumberAnimation{ duration: 100 }
-            }
+            Behavior on spread { NumberAnimation { duration: 150 } }
         }
     }
 }

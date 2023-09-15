@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qtquickcontrols2.conf</file>
-        <file>ColorPicker.qml</file>
-        <file>resources/Carlito-Regular.ttf</file>
     </qresource>
 </RCC>

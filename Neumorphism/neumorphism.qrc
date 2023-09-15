@@ -1,18 +1,12 @@
 <RCC>
     <qresource prefix="/Neumorphism">
-        <file>Base/AdvancedRectangle.qml</file>
-        <file>Base/Border.qml</file>
         <file>Base/BoxShadow.qml</file>
-        <file>Base/GradientColor.qml</file>
-        <file>Base/RoundedInEffect.qml</file>
-        <file>Base/RoundedOutEffect.qml</file>
-        <file>Base/Shadow.qml</file>
+        <file>Base/NeumEffect.qml</file>
         <file>Base/DashedRing.qml</file>
-        <file>Base/DashedRect.qml</file>
-        <file>Base/Handler.qml</file>
-        <file>Base/Wave.qml</file>
         <file>Base/NeumorphismView.qml</file>
         <file>Base/FastShadow.qml</file>
+        <file>Base/Sphere.qml</file>
+        <file>Base/NeumorphismView.qml</file>
         <file>Button.qml</file>
         <file>CheckBox.qml</file>
         <file>Label.qml</file>
@@ -35,6 +29,10 @@
         <file>StackView.qml</file>
         <file>qmldir</file>
         <file>script.js</file>
-        <file>Base/NeumorphismView.qml</file>
+        <file>shaders/neum.glsl</file>
+        <file>shaders/neum.frag</file>
+        <file>shaders/wave.glsl</file>
+        <file>shaders/pseudo-sphere.glsl</file>
+        <file>shaders/cheap-sphere.glsl</file>
     </qresource>
 </RCC>

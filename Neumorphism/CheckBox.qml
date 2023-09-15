@@ -1,115 +1,78 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
-import Neumorphism 1.0
+import Neumorphism 1.3
 
 T.CheckBox {
     id: control
 
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                            implicitContentWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                             implicitContentHeight + topPadding + bottomPadding,
-                             implicitIndicatorHeight + topPadding + bottomPadding,
-                             indicator.height + topPadding + bottomPadding)
-    property alias shadow: indicatorBackground.shadow
-    palette.buttonText: 'gray'
+    implicitWidth: Math.max(implicitContentWidth + implicitBackgroundWidth, implicitContentWidth)
+    implicitHeight: Math.max(implicitBackgroundHeight, implicitIndicatorHeight)
 
     padding: 6
     spacing: 6
 
-    indicator: RoundedInEffect {
-        id: indicatorBackground
+    indicator: Item {
+        implicitWidth: 22
+        implicitHeight: 22
 
-        implicitWidth:  28
-        implicitHeight: 28
+        width:  [22, 0, 22][control.checkState]
+        height: [22, 0, 10][control.checkState]
 
-        shadow {
-            offset: 5
-            radius: 7
-            spread: 8
-            distance: 1.0
-        }
-
-        x: control.text ?
-               (control.mirrored ?
-                    control.width - width - control.rightPadding :
-                    control.leftPadding) :
-               control.leftPadding + (control.availableWidth - width) / 2
-
-        y: control.topPadding + (control.availableHeight - height) / 2
-
-        color: control.palette.button
-        /*!
-         * TODO: add active and visual focus effect
-         * control.visualFocus
-         * control.activeFocus
-         */
+        x: control.text ? (control.mirrored ? control.width - width : (control.height - width) / 2) :
+                          (control.availableWidth - width) / 2
+        y: (control.height - height) / 2;
 
         BoxShadow {
-            id: ishade
+            width: parent.width; height: parent.height
+            visible: width
 
-            width: ibox.width + 6
-            height: ibox.height + 6
-            visible: ibox.width > 0
-            color: '#44000000'
-            anchors.centerIn: ibox
-            shadow { radius: 10; spread: 10 }
+            padding: -4; leftPadding: -2; topPadding: -2
+            color: '#55000000'
+            spread: 10
         }
 
-        AdvancedRectangle {
-            id: ibox
-            x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
+        Rectangle {
+            width: parent.width; height: parent.height
 
-            radius: 0.25
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0.0,0.0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.5,0.5)}
-            ]
+            border.color: '#22ffffff'
+            radius: 5
+
+            gradient: Gradient {
+                GradientStop{ color: Qt.lighter(palette.button, 1.2); position: 0 }
+                GradientStop{ color: Qt.darker(palette.button, 1.3); position: 1 }
+            }
         }
 
-        /*!
-         * TODO: write a cleaner code.
-         */
-        states:[
-            State {
-                when: control.checkState === Qt.Checked
-                PropertyChanges {
-                    target: ibox
-                    width: indicatorBackground.width * 0.75
-                    height: indicatorBackground.height * 0.75
-                }
-            },
-            State {
-                when: control.checkState === Qt.Unchecked
-                PropertyChanges { target: ibox; width: 0; height: 0 }
-            },
-            State {
-                when: control.checkState === Qt.PartiallyChecked
-                PropertyChanges {
-                    target: ibox
-                    width: indicatorBackground.width * 0.75
-                    height: indicatorBackground.height * 0.20
-                }
-            }
-        ]
+        Behavior on width {NumberAnimation {duration: 200}}
+        Behavior on height {NumberAnimation {duration: 200}}
+    }
 
-        transitions: [
-            Transition {
-                from: "*"
-                to: "*"
-                NumberAnimation { properties: "width, height"; duration: 100 }
-            }
-        ]
+    background: Item {
+        implicitWidth: 28
+        implicitHeight: 28
+
+        NeumEffect {
+            padding: -pad/3
+
+            width: parent.height; height: 28
+
+            color: control.palette.button
+            dark: Qt.darker(color, 1.5)
+            light: Qt.lighter(color, 1.5)
+
+            inward: true; opacity: 1 - color.hslLightness * 0.8
+            blend: 15; spread: 5; pad: 7; angle: 45; radius: 5
+        }
     }
 
     contentItem: Text {
-        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: control.indicator && !control.mirrored ? control.implicitIndicatorWidth + control.spacing : 0
+        rightPadding: control.indicator && control.mirrored ? control.implicitIndicatorWidth + control.spacing : 0
+
         verticalAlignment: Text.AlignVCenter
         text: control.text
         font: control.font

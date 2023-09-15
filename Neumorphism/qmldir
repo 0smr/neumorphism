@@ -5,20 +5,13 @@ Script                 1.0 script.js
 
 singleton Neumorphism  1.0 Neumorphism.qml
 
-internal Shadow        Base/Shadow.qml
-internal Border        Base/Border.qml
-internal Handler       Base/Handler.qml
-
-RoundedInEffect        1.0 Base/RoundedInEffect.qml
-RoundedOutEffect       1.0 Base/RoundedOutEffect.qml
-AdvancedRectangle      1.0 Base/AdvancedRectangle.qml
+NeumEffect             1.3 Base/NeumEffect.qml
 BoxShadow              1.0 Base/BoxShadow.qml
 GradientColor          1.0 Base/GradientColor.qml
 DashedRing             1.0 Base/DashedRing.qml
-DashedRect             1.0 Base/DashedRect.qml
-Wave                   1.0 Base/Wave.qml
 NeumorphismView        1.2 Base/NeumorphismView.qml
 FastShadow             1.2 Base/FastShadow.qml
+Sphere                 1.3 Base/Sphere.qml
 
 Button                 1.0 Button.qml
 BusyIndicator          1.0 BusyIndicator.qml
