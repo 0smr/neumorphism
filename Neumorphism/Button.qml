@@ -75,17 +75,16 @@ T.Button {
         Behavior on spread { NumberAnimation { duration: 50 } }
 
         Rectangle {
-            x: (parent.width - width)/2
-            y: (parent.height - height)/2
+            x: 5; y: 5
 
             width:  parent.width - 10
-            height: width
+            height: parent.height - 10
 
             visible: control.highlighted
             color: 'transparent'
             radius: 6
             opacity: 0.5
-            border.color: Qt.tint(control.palette.highlight, "#12ffffff")
+            border.color: Neumorphism.alpha(control.palette.highlight, 0.5)
         }
 
         NeumEffect {

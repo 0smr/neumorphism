@@ -38,10 +38,13 @@ Control {
         property vector4d attrs: Qt.vector4d(control.spread / _min, control.angle * 0.017453,
                                              control.pad / _min, control.blend / _min);
         property vector4d radius: {
-            const r = control.radius/_min;
-            const {x,y,z,w} = control.radius;
-            if(Number.isFinite(control.radius)) return Qt.vector4d(r,r,r,r);
-            else return radius;
+            if(Number.isFinite(control.radius)) {
+                const r = control.radius/_min;
+                return Qt.vector4d(r,r,r,r);
+            } else {
+                const {x,y,z,w} = control.radius;
+                return Qt.vector4d(x,y,z ?? x,w ?? y);
+            }
         }
 
         fragmentShader: "qrc:/Neumorphism/shaders/neum.glsl"

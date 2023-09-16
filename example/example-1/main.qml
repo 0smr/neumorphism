@@ -74,7 +74,8 @@ ApplicationWindow {
     SwipeView {
         id: swipView
         currentIndex: 0
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
 
         VGrid {
             spacing: 15
@@ -244,6 +245,33 @@ ApplicationWindow {
                 id: comboBox
                 model: 40
                 editable: true
+            }
+        }
+
+        VGrid {
+            Label { text: "Dial" }
+
+            NeumorphismView {
+                contentItem: TextEdit {
+                    rightPadding: 5; leftPadding: 5
+                    text: 'Made\nBy\nSMR'
+
+                    font.pixelSize: 85
+                    font.bold: true
+                    font.letterSpacing: -0
+
+                    color: window.palette.button
+
+                    cursorDelegate: Component {
+                        Item {
+                            Rectangle {
+                                y: parent.height - 10
+                                width: 5; height: 5; radius: 5
+                                color: window.palette.button
+                            }
+                        }
+                    }
+                }
             }
         }
     }

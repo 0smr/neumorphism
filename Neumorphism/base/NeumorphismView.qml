@@ -8,42 +8,42 @@ import QtQuick.Controls 2.12
 Control {
     id: control
 
-    property Shadow shadow: Shadow {
-        angle: 25
-        radius: 10
-        color1: Qt.darker(control.palette.base, 1.3)
-        color2: Qt.lighter(control.palette.base, 1.6)
-    }
+    property real angle: 25
+    property real radius: 15
+    property color light: Qt.lighter(palette.button, 0.85 + priv.lightness/3)
+    property color dark: Qt.darker(palette.button, 1.8 - priv.lightness/2)
 
     QtObject {
-        id: innerVars
-        readonly property real radianAngle: control.shadow.angle / 57.2958
+        id: priv
+        property real lightness: control.palette.button.hslLightness
+        property real radianAngle: control.angle / 57.2958
+        property point center:  Qt.point(control.availableWidth/2, control.availableHeight/2)
     }
 
-    width: contentItem.implicitWidth
-    height: contentItem.implicitHeight
+    implicitWidth: implicitContentWidth
+    implicitHeight: implicitContentHeight
 
     background: Item {
-
-        width: control.implicitContentWidth
-        height: control.implicitContentHeight
+        implicitWidth: control.implicitContentWidth
+        implicitHeight: control.implicitContentHeight
 
         FastShadow {
             // http://blog.ivank.net/fastest-gaussian-blur.html
-            x: Math.cos(innerVars.radianAngle); y: Math.sin(innerVars.radianAngle)
+            x: 1.5 * Math.cos(priv.radianAngle)
+            y: 1.5 * Math.sin(priv.radianAngle)
             width: parent.width; height: parent.height
-            radius: control.shadow.radius
+            radius: control.radius
             source: contentItem
-            color: control.shadow.color1
+            color: control.dark
         }
 
         FastShadow {
-            x: 1.5 * Math.cos(innerVars.radianAngle + 3.14)
-            y: 1.5 * Math.sin(innerVars.radianAngle + 3.14)
+            x: 1.5 * Math.cos(priv.radianAngle + 3.14)
+            y: 1.5 * Math.sin(priv.radianAngle + 3.14)
             width: parent.width; height: parent.height
-            radius: control.shadow.radius
+            radius: control.radius
             source: contentItem
-            color: control.shadow.color2
+            color: control.light
         }
     }
 
