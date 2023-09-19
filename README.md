@@ -11,9 +11,15 @@ The Neumorphic design concept has been applied to most of the components.
 [Wikipedia](https://en.wikipedia.org/wiki/Neumorphism)
 > **Neumorphism** is a *design style* used in *graphical user interfaces*. It is commonly identified by a soft and light look (for which it is sometimes referred to as **soft UI**) with elements that appear to protrude from or dent into the background rather than float on top of it.
 
-<!-- ## Preview
-<div align="center">
-</div> -->
+## Preview
+
+<details open>
+<table><tr>
+<td><img width="380" src="https://github.com/0smr/neumorphism/assets/51415059/40294c6d-3a9c-4388-9967-c02b7bc4aa4a"/></td>
+<td><img width="380" src="https://github.com/0smr/neumorphism/assets/51415059/1a058034-2963-4c52-b994-0a08d9dac0ca"/></td>
+<td><video src="https://github.com/0smr/neumorphism/assets/51415059/e200a83a-2e00-4111-89b0-c5bf06526a20.mp4"></td>
+</tr></table>
+</details>
 
 ## How to use
 
