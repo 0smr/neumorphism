@@ -1,78 +1,92 @@
 # QML Neumorphism (soft UI) QtQuick style.
-<p><img src="https://img.shields.io/github/v/tag/smr76/qml-neumorphism?sort=semver&label=version&labelColor=0bd&color=07b" alt="version tag">
-<img src="https://img.shields.io/github/license/smr76/qml-neumorphism?color=36b245" alt="license">
+<p><img src="https://img.shields.io/github/v/tag/0smr/neumorphism?sort=semver&label=version&labelColor=0bd&color=07b" alt="version tag">
+<img src="https://img.shields.io/github/license/0smr/neumorphism?color=36b245" alt="license">
 <a href="https://www.blockchain.com/bch/address/bitcoincash:qrnwtxsk79kv6mt2hv8zdxy3phkqpkmcxgjzqktwa3">
 <img src="https://img.shields.io/badge/BCH-Donate-f0992e?logo=BitcoinCash&logoColor=f0992e" alt="BCH donate"></a></p>
 
 Start developing *Neumorphic QtQuick* applications using Neumorphism UI.<br>
-The Neumorphic design concept has been applied to all of the components.
-
-Also I used `ShaderEffect` for drop shadows, so there may be a few computational errors, but it's still better than QML's native drop shadow.
+The Neumorphic design concept has been applied to most of the components.
 
 ### What is Neumorphism?
-[Medium](https://artofofiare.medium.com/neumorphism-the-right-way-a-2020-design-trend-386e6a09040a)
-> Neumorphism (or Neo-skeuomorphism) is a modern iteration of a style of designing web elements, frames, screens, etc. known as [Skeuomorphism](https://medium.muz.li/skeuomorphic-design-a-controversial-ux-approach-that-is-making-a-comeback-a0b6e93eb4bb).
+[Wikipedia](https://en.wikipedia.org/wiki/Neumorphism)
+> **Neumorphism** is a *design style* used in *graphical user interfaces*. It is commonly identified by a soft and light look (for which it is sometimes referred to as **soft UI**) with elements that appear to protrude from or dent into the background rather than float on top of it.
 
 ## Preview
 
-<div align="center">
-<img src="https://img.shields.io/badge/light purple-e8f0fb">
-<img src="https://img.shields.io/badge/light gray-ebe5ec">&ensp;<br>
-<img src="Extra/Preview/preview-1.webp" width="45%">
-<img src="Extra/Preview/preview-2.webp" width="45%">
-</div>
+<details open>
+<table><tr>
+<td><img width="380" src="https://github.com/0smr/neumorphism/assets/51415059/40294c6d-3a9c-4388-9967-c02b7bc4aa4a"/></td>
+<td><img width="380" src="https://github.com/0smr/neumorphism/assets/51415059/1a058034-2963-4c52-b994-0a08d9dac0ca"/></td>
+<td><video src="https://github.com/0smr/neumorphism/assets/51415059/e200a83a-2e00-4111-89b0-c5bf06526a20.mp4"></td>
+</tr></table>
+</details>
 
 ## How to use
-> **Warning**<br>
-> This components hava only been tested on **Qt version 5.15.2** and *Windows OS* at *3840x2160 resolution* with a *scaling factor of 250 percent*; ***USAGE OF THIS COMPONENTS CARRIES NO WARRANTY***.
-> <br>&nbsp;
+
+> **NOTE**<br>
+> Using shaders in `Qt 6` requires compiling shaders to [`SPIR-V`](https://www.khronos.org/spir), which is quite different from the way it was done in `Qt 5`.<br>
+> Therefore, shaders are currently not compatible with `Qt 6`.
+
+## Contribution
+
+Contributions are welcome.
+
+Also if you are a designer with a better design idea, you can create an [issue](https://github.com/0smr/neumorphism) and let us discuss your idea.
 
 ### Usage
-Clone the repository first.
-```bash
-git clone https://github.com/SMR76/qml-neumorphism.git
-```
-Then include `Neumorphism.pri` in your project. <sub>[see example-1](Example/example-1/example-1.pro#L11)</sub>
-```make
-include('path/to/Neumorphism.pri')
-```
-Add `qrc:/` to the engine import path. <sub>[see example-1](Example/example-1/main.cpp#L12)</sub>
-```cpp
-engine.addImportPath("qrc:/");
-```
-And finally import the `Neumorphism` module. <sub>[see example-1](Example/example-1/main.qml#L5)</sub>
-```qml
-import Neumorphism 1.2
-```
+
++ Clone the repository first.
+    ```bash
+    git clone "https://github.com/0smr/neumorphism.git"
+    ```
++ Then add `neumorphism` to your makefile.
+    * **QMake**: <sub>[example-1](example/example-1/example-1.pro#L7)</sub>
+        ```make
+        include("path/to/Neumorphism.pri")
+        ```
+    * **CMake**: <sub>[example-2](example/example-2/CMakeLists.txt#L30..L32)</sub>
+        ```cmake
+        add_subdirectory(path/to/Neumorphism/)
+        target_link_libraries(${target-name} neumorphism)
+        ```
++ Add `qrc:/` to the engine's import path.
+    <sub>[example-1](example/example-1/main.cpp#L12)</sub>
+    ```cpp
+    engine.addImportPath("qrc:/");
+    ```
++ Import the `Neumorphism` module.
+    <sub>[example-1](example/example-1/main.qml#L6)</sub>
+    ```qml
+    import Neumorphism 1.3
+    ```
 
 If you are confused, please refer to [Example-1](Example/example-1/) for a clearer understanding of what you should do.
 
 ## Components
 
-- [x] Button
-- [x] Radio Button
-- [x] CheckBox
-- [x] Slider
-- [x] TextArea
-- [x] TextField
-- [x] ProgressBar
-- [x] RadioButton
-- [x] Switch
-- [x] RangeSlider
-- [x] SpinBox
-- [x] Tumbler
-- [x] Dial
-- [x] BusyIndicator
-- [x] SplitView
-- [x] StackView
-- [x] ComboBox
+- Button
+- Radio Button
+- CheckBox
+- Slider
+- TextArea
+- TextField
+- ProgressBar
+- RadioButton
+- Switch
+- RangeSlider
+- SpinBox
+- Tumbler
+- Dial
+- BusyIndicator
+- SplitView
+- StackView
+- ComboBox
 ---
-- [x] HorizontalSeparator
-- [x] Custom Neumorphic shape
+- NeumorphismView
 
 ## Issues
 
-Please file an issue on [issues page](https://github.com/SMR76/qml-neumorphism/) if you have any problems.
+Please file an issue on [issues](https://github.com/0smr/neumorphism) if you have any problems.
 
 ## Documentation
 

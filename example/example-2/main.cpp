@@ -1,15 +1,23 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QTransform>
 
-int main(int argc, char *argv[])
-{
+#include <QDirIterator>
+
+int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
+    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
-    // Path resources root.
-    engine.addImportPath("qrc:/");
+
+	app.setOrganizationName("smr");
+	app.setOrganizationDomain("smr.best");
+	app.setApplicationName("example-3");
+
+	QQmlApplicationEngine engine;
+	// Path to module.
+	engine.addImportPath("qrc:/");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -17,7 +25,7 @@ int main(int argc, char *argv[])
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
         }, Qt::QueuedConnection);
-    engine.load(url);
+    engine.load("qrc:/main.qml");
 
     return app.exec();
 }

@@ -1,6 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 
 import QtQuick 2.15
@@ -16,64 +16,62 @@ T.Switch {
                              implicitIndicatorHeight + topPadding + bottomPadding)
 
     padding: 6
-    spacing: 6
+    spacing: 0
 
-    indicator: RoundedInEffect {
-        implicitWidth: 56
-        implicitHeight: 28
+    indicator: Item {
+        implicitWidth: 48
+        implicitHeight: 22
 
-        x: control.text ?
-               (control.mirrored ?
-                    control.width - width - control.rightPadding :
-                    control.leftPadding) :
-               control.leftPadding + (control.availableWidth - width) / 2
+        x: control.text ? (control.mirrored ? control.width - width : 0) :
+                          (control.availableWidth - width) / 2
+        y: (control.height - height) / 2;
 
-        y: control.topPadding + (control.availableHeight - height) / 2
+        T.Control {
+            x: Neumorphism.clamp(control.visualPosition * parent.width - width/2, parent.y,
+                                 parent.width - width - parent.y)
 
-        color: control.palette.button
+            width: parent.height; height: width
+            padding: -control.down
 
-        shadow { offset: 7; radius: width; spread: 12; distance: 1.0; angle: 25 }
-
-        /*!
-         * TODO: add active and visual focus effect
-         * control.visualFocus
-         * control.activeFocus
-         */
-
-        BoxShadow {
-            id: ishade
-            x: ibox.x - width * 0.1
-            y: ibox.y - width * 0.1
-
-            width:  ibox.width * 1.4
-            height: width
-            color: '#000'
-            opacity: 0.1
-
-            shadow {
-                radius: width
-                spread: 10
-            }
-        }
-
-        AdvancedRectangle {
-            id: ibox
-            x: Math.min(Math.max(y, control.visualPosition * parent.width - width/2), parent.width - width - y)
-            y: parent.height * 0.125
-
-            width:  parent.height * 0.75
-            height: width
-
-            radius: 0.5
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.20); stop: Qt.vector2d(0,0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.5, 0.5)}
-            ]
+            Behavior on padding {NumberAnimation{}}
 
             Behavior on x {
                 enabled: !control.down
-                NumberAnimation{ duration: 80 }
+                NumberAnimation{ duration: 100 }
             }
+
+            rightInset: -2
+            bottomInset: -2
+
+            contentItem: Sphere {
+                width: 20
+                height: 20
+                dark: Qt.darker(control.palette.button, 1.3)
+                light: Qt.lighter(control.palette.button, 1.9 - control.palette.button.hslLightness)
+                dist: 2.5 + control.down * 0.5
+            }
+
+            background: BoxShadow {
+                color: Qt.darker(control.palette.button, 1.3)
+                spread: width/2 - control.pressed
+                radius: width
+            }
+        }
+    }
+
+    background: Item {
+        implicitWidth: 48
+        implicitHeight: 28
+
+        NeumEffect {
+            width: control.indicator.width; height: parent.height
+
+            color: control.palette.button
+            dark: Qt.darker(color, 1.5)
+            light: Qt.lighter(color, 1.5)
+
+            inward: true; opacity: 1 - color.hslLightness * 0.8
+            blend: 15; spread: 15; pad: 10; angle: 45; radius: 10
         }
     }
 

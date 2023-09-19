@@ -1,226 +1,278 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import QtQuick.Controls 2.15 as QQC
+import QtQuick.Controls 2.15
+import Qt.labs.settings 1.1
 
-import Neumorphism 1.2
+import Neumorphism 1.3
 
-QQC.ApplicationWindow {
+ApplicationWindow {
     id: window
 
-    width: 590
-    height: 350
+    width: 260
+    height: 450
     visible: true
-    color: "#e7eff9" // #78ca85
 
-    palette.base: color
-    palette.button: color
-    palette.text: "#fff"
-    palette.buttonText: "gray"
-    palette.highlight: "#ff7a70"
+    palette {
+        base: '#333'
+        button: '#333'
+        window: '#333'
+        highlight: '#23a7f2'
 
-    FontLoader {
-        id: carlito
-        source: "resources/Carlito-Regular.ttf"
+
+        text: '#abb'
+        windowText: '#abb'
+        buttonText: '#abb'
+        highlightedText: '#abb'
     }
 
-    Grid {
-        flow: Grid.LeftToRight
+    component ColorBtn: Button {
+        width: 30; height: width; text: '-'
+        highlighted: true
+        onClicked: {
+            window.palette.base = palette.highlight
+            window.palette.button = palette.highlight
+            window.palette.window = palette.highlight
 
-        rows: flow == Grid.LeftToRight ? 1 : -1
-        columns: flow == Grid.LeftToRight ? -1 : 1
+            window.palette.text = palette.buttonText
+            window.palette.buttonText = palette.buttonText
+            window.palette.windowText = palette.buttonText
+        }
+    }
 
-        padding: 25
-        spacing: 25
+    component VGrid: Grid {
+        spacing: 10
+        columns: 1; rows: -1
+        horizontalItemAlignment: Qt.AlignHCenter
+        Item {width: parent.width; height: 1}
+    }
 
-        Column {
-            spacing: 10
-            Row {
-                spacing: 10
-                Button {
-                    width: 60; height: 60
-                    text: "Color\npicker"
-                    font.family: carlito.name
-                    onClicked: colorPickerW.visible = true
-                }
+    Settings {
+        id: settings
+        fileName: 'config.conf'
+        property alias wcolor: window.palette.window
+        property alias wtcolor: window.palette.windowText
+        property alias bcolor: window.palette.button
+        property alias btcolor: window.palette.buttonText
+        property alias cindex: swipView.currentIndex
+    }
 
-                Button {
-                    width: 60; height: 60
-                    text: "Btn 2"
-                    highlighted: true
-                    font { family: carlito.name; weight: Font.Medium; }
-                }
+    Control {
+        x: 5; y: window.height - height - 5; z: 3
+        padding: 5
+        contentItem: Row {
+            ColorBtn { palette{highlight: '#a3d4d6';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#b0d0e9';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#06d6a0';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#d5b9ff';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#515255';buttonText: '#a4a5a6'}}
+            ColorBtn { palette{highlight: '#edc9aa';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#d1d2d3';buttonText: '#545556'}}
+            ColorBtn { palette{highlight: '#313233';buttonText: '#a4a5a6'}}
+        }
+    }
 
-                Button {
-                    width: 60; height: 60
-                    text: "Btn 3"
-                    checkable: true
-                    font.family: carlito.name
+    SwipeView {
+        id: swipView
+        currentIndex: 0
+        width: parent.width
+        height: parent.height
+
+        VGrid {
+            spacing: 15
+
+            Frame {
+                Grid {
+                    columns: 3
+                    spacing: 10
+                    Button {
+                        width: 55
+                        height: width
+                        text: "Normal"
+                    }
+
+                    Button {
+                        width: 55
+                        height: width
+                        text: "High\n-light"
+                        highlighted: true
+                    }
+
+                    Button {
+                        width: 55
+                        height: width
+                        text: "Check\n-able"
+                        checkable: true
+                    }
+
+                    Button {
+                        width: 55
+                        height: width
+                        text: "Flat Btn"
+                        flat: true
+                    }
+
+                    Button {
+                        width: 40
+                        height: width
+                        text: "Disabled\nBtn"
+                        enabled: false
+                    }
+
+                    Button {
+                        width: 40
+                        height: width
+                        text: "Small"
+                    }
                 }
             }
 
-            Row {
-                CheckBox {
-                    text: "Check\nbox"
-                    font.family: carlito.name
-                }
+            Button {
+                width: parent.width - 20
+                height: 45
+                text: "Wide Checkable Button"
+                checkable: true
+                font.family: 'carlito'
+            }
 
+            Row {
                 CheckBox {
                     text: "Check\nbox"
                     tristate: true
-                    font.family: carlito.name
-                }
-            }
-
-            Row {
-                Switch {
-                    text: "Check\nbox"
-                    font.family: carlito.name
+                    font.family: 'carlito'
                 }
 
                 Switch {
-                    text: "Check\nbox"
-                    font.family: carlito.name
+                    text: "Switch"
+                    font.family: 'carlito'
                 }
             }
 
             Row {
                 RadioButton {
-                    text: "Radio Btn"
-                    font.family: carlito.name
+                    text: "Radio 1"
+                    font.family: 'carlito'
                 }
 
                 RadioButton {
-                    text: "Radio Btn"
-                    font.family: carlito.name
+                    text: "Radio 2"
+                    font.family: 'carlito'
                 }
             }
 
             Row {
                 spacing: 5
+
                 Text {
                     height: parent.height
                     text: "Busy Indicator \u2192"
-                    color: window.palette.buttonText
+                    color: window.palette.windowText
                     verticalAlignment: Text.AlignVCenter
-                    font { family: carlito.name }
+                    font { family: 'carlito' }
                 }
 
-                BusyIndicator {
-                    width: 100
-                    height: 100
-                    running: true
+                Control {
+                    width: 50; height: 50
 
-                    Rectangle {
-                        anchors.fill: parent
+                    contentItem: BusyIndicator {
+                        running: false
+                        TapHandler { onTapped: parent.running ^= true }
+                    }
+
+                    background: Rectangle {
                         color: 'transparent'
-                        radius: 6
-                        border.width: 1
-                        border.color: Qt.darker(window.palette.base, 1.1)
+                        border.color: window.palette.buttonText
+                        opacity: 0.5
+                        radius: 5
                     }
                 }
             }
         }
 
-        Rectangle {
-            width: 1
-            height: window.height - 45
-            color: '#000'
-            opacity: 0.1
-        }
+        VGrid {
+            spacing: 5
 
-        Column {
-            spacing: 7
-            HorizontalSeprator {
-                height: 50
-                width: 180
-                a: 0.1
-                spread: 0.8
-                palette.base: Qt.lighter(window.color, 1.1)
-            }
-
+            Label { text: "Progress Bar" }
             ProgressBar {
-                width: 180;
-                palette.button: window.color
+                width: parent.width
                 value: slider1.value
             }
 
+            Label { text: "Slider" }
             Slider {
                 id: slider1
-                width: 180;
-                palette.button: window.color
-            }
-
-            RangeSlider {
-                width: 180;
-                palette.button: window.color
-            }
-
-            SpinBox {
-                palette.button: window.color
-                font.family: carlito.name
-                palette.text: Qt.darker(window.color, 1.5)
-            }
-
-            Column {
-                spacing: 10
-                TextArea {
-                    width: 180
-                    palette.base: window.color
-                    text: 'Example of how TextArea works on\nqml neumorphism style.'
-                    font.family: carlito.name
-                    palette.text: Qt.darker(window.color, 1.5)
-                }
-
-                TextField {
-                    width: 180
-                    palette.base: window.color
-                    text: 'neumorphism text field.'
-                    font.family: carlito.name
-                    palette.text: Qt.darker(window.color, 1.5)
-                }
-            }
-        }
-
-        Rectangle {
-            width: 1
-            height: window.height - 45
-            color: '#000'
-            opacity: 0.1
-        }
-
-        Column {
-            Text {
                 width: parent.width
-                text: "Dial"
-                color: window.palette.buttonText
-                horizontalAlignment: Text.AlignHCenter
-                font.family: carlito.name
+                value: 0.3
             }
+
+            Label { text: "RangeSlider" }
+            RangeSlider { width: parent.width }
+
+            Label { text: "SpinBox" }
+            SpinBox { to: 10 }
+
+            Label { text: "TextArea" }
+            TextArea {
+                width: parent.width - 20
+                text: 'Simple example of \nTextArea.'
+            }
+
+            Label { text: "TextField" }
+            TextField {
+                width: parent.width - 20
+                text: 'Example text field.'
+            }
+        }
+
+        VGrid {
+            Label { text: "Dial" }
 
             Dial {
                 width: 100
                 height: 100
             }
 
+            Label { text: "Tumbler" }
+
+            Tumbler {
+                model: 40
+                height: 75
+                visibleItemCount: 3
+            }
+
+            Label { text: "ComboBox" }
+
+            ComboBox {
+                id: comboBox
+                model: 40
+                editable: true
+            }
+        }
+
+        VGrid {
+            Label { text: "Dial" }
+
             NeumorphismView {
-                id: neumorphismView
+                contentItem: TextEdit {
+                    rightPadding: 5; leftPadding: 5
+                    text: 'Made\nBy\nSMR'
 
-                shadow.angle: 65
-
-                contentItem: Text {
-                    text: 'Neum'
                     font.pixelSize: 85
                     font.bold: true
-                    color: '#eee'
+                    font.letterSpacing: -0
+
+                    color: window.palette.button
+
+                    cursorDelegate: Component {
+                        Item {
+                            Rectangle {
+                                y: parent.height - 10
+                                width: 5; height: 5; radius: 5
+                                color: window.palette.button
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
-
-    Window {
-        id: colorPickerW
-        ColorPicker { id: colorPicker; onSelectedColorChanged: window.color = selectedColor }
-        title: ''; flags: Qt.Tool;
-        minimumWidth:   colorPicker.width; minimumHeight:  200
     }
 }

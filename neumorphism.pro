@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     Neumorphism \
-    Example
+    example
 
-Example.depends = Neumorphism
+example.depends = Neumorphism

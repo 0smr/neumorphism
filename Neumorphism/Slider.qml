@@ -1,7 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
-
+// https://0smr.github.io
 
 import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
@@ -15,73 +14,56 @@ T.Slider {
                              implicitHandleHeight + topPadding + bottomPadding)
     padding: 6
 
-    handle: Item {
-        x: control.leftPadding + (control.horizontal ? control.visualPosition * (control.availableWidth - width) : (control.availableWidth - width) / 2)
-        y: control.topPadding  + (control.horizontal ? (control.availableHeight - height) / 2 : control.visualPosition * (control.availableHeight - height))
+    handle: T.Control {
+        x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
+        y: control.topPadding  + (control.availableHeight - height) / 2
 
-        implicitWidth:   20
-        implicitHeight:  20
+        implicitWidth: 20
+        implicitHeight: 20
 
-        width:  implicitWidth * (control.activeFocus ? 1.0 : 0.8)
+        padding: !control.activeFocus - control.pressed
+        width: implicitWidth
         height: width
 
-        Behavior on width { NumberAnimation{ duration: 100} }
+        rightInset: -2
+        bottomInset: -2
 
-        BoxShadow {
-            id: ishade
-            x: -width * 0.1
-            y: x
+        Behavior on padding { NumberAnimation{ duration: 100} }
 
-            property real offset: control.height * (control.pressed ? 0.30 : 0.25)
-
-            width:  ibox.width + offset
-            height: width
-
-            color: '#66000000'
-            shadow {
-                radius: width
-                spread: 16
-            }
-
-            Behavior on offset { NumberAnimation{ duration: 100} }
+        contentItem: Sphere {
+            dark: Qt.darker(control.palette.button, 1.3)
+            light: Qt.lighter(control.palette.button, 1.9 - control.palette.button.hslLightness)
+            dist: 2.5
         }
 
-        AdvancedRectangle {
-            id: ibox
-            width:  parent.width
-            height: parent.height
-
-            radius: 0.5
-
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0,0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(1,1)}
-            ]
+        background: BoxShadow {
+            color: Qt.darker(control.palette.button, 1.3)
+            radius: width
+            spread: width/2 - control.pressed
         }
     }
 
-    background: RoundedInEffect {
-        x: (control.width  - width) / 2
-        y: (control.height - height) / 2
+    background: NeumEffect {
+        topPadding: control.topInset + control.topPadding
+        bottomPadding: control.bottomInset + control.bottomPadding
+        leftPadding: control.leftInset + control.leftPadding
+        rightPadding: control.rightInset + control.rightPadding
 
-        implicitWidth:  control.horizontal ? 200 : 10
-        implicitHeight: control.horizontal ? 10 : 200
+        implicitWidth: 200
+        implicitHeight: 30
 
         color: control.palette.button
+        dark: Qt.darker(color, 1.5)
+        light: Qt.lighter(color, 1.5)
 
-        /*!
-         * FIXME: binding loop error when use implicitHeight to feed height.
-         * TODO: add mirror state.
-         */
-        width:  control.horizontal ? control.availableWidth : implicitWidth
-        height: control.horizontal ? 10 : control.availableHeight
+        radius: height
+        inward: true
 
-        shadow {
-            radius: width
-            offset: 6
-            spread: 10
-            distance: 0.05
-            angle:  control.horizontal  ? 0.00 : 90.0
-        }
+        opacity: 1 - color.hslLightness * 0.8
+
+        pad: 10
+        angle: Math.atan((availableHeight - pad)/(availableWidth - pad)) * 57.295
+        blend: spread
+        spread: availableHeight/2
     }
 }

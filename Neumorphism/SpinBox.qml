@@ -1,6 +1,6 @@
 // Copyright (C) 2022 smr.
 // SPDX-License-Identifier: MIT
-// https://smr76.github.io
+// https://0smr.github.io
 
 
 import QtQuick 2.15
@@ -29,11 +29,10 @@ T.SpinBox {
     }
 
     contentItem: TextInput {
-        z: 2
         text: control.displayText
 
         font: control.font
-        color: control.palette.text
+        color: control.palette.buttonText
         selectionColor: control.palette.highlight
         selectedTextColor: control.palette.highlightedText
         horizontalAlignment: Text.AlignHCenter
@@ -75,39 +74,31 @@ T.SpinBox {
     }
 
 
-    background: Rectangle {
-        id: background
+    background: T.Control {
         implicitWidth: 80
         implicitHeight: 30
 
-        radius: width
-        color: 'transparent'
+        contentItem: NeumEffect {
+            padding: -1
+            color: 'transparent'
+            dark: Qt.darker(control.palette.button, 1.1)
+            light: Qt.lighter(control.palette.button, 1.1)
 
-        BoxShadow {
-            x: (parent.width - width) /2 + 1
-            y: (parent.height - height) /2 + 1
-            width: contentItem.implicitWidth + 20
-            height: parent.height
-            shadow.radius: width
-            shadow.spread: 25
+            visible: spread
+
+            radius: width
+            inward: true
+            angle: Math.atan((height - pad)/(width - pad)) * 57.295 + 181
+            blend: 10; pad: 5; spread: 6
+
+            background: Rectangle { color: control.palette.button; radius: width }
         }
 
-        AdvancedRectangle {
-            x: (parent.width - width) /2
-            y: (parent.height - height) /2
-            width: contentItem.implicitWidth + 15
-            height: parent.height * 0.8
-            radius: 0.5
-
-            gradient: [
-                GradientColor{color: Qt.lighter(control.palette.button, 1.1); stop: Qt.vector2d(0,0)},
-                GradientColor{color: control.palette.button; stop: Qt.vector2d(0.6,0.5)}
-            ]
-
-            Behavior on x {
-                enabled: !control.down
-                NumberAnimation{ duration: 80 }
-            }
+        background: BoxShadow {
+            color: Qt.darker(control.palette.button, 2.0)
+            padding: -4; topPadding: -2; leftPadding: -2
+            radius: width
+            spread: 10
         }
     }
 }
