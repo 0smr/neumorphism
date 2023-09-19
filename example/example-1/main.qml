@@ -13,16 +13,16 @@ ApplicationWindow {
     visible: true
 
     palette {
-        base: "#333"
-        button: "#333"
-        highlight: "#f03b33"
-
+        base: '#333'
+        button: '#333'
         window: '#333'
-        text: "#eee"
-        windowText: "#eee"
+        highlight: '#23a7f2'
 
-        buttonText: "#aaa"
-        highlightedText: "#ccc"
+
+        text: '#abb'
+        windowText: '#abb'
+        buttonText: '#abb'
+        highlightedText: '#abb'
     }
 
     component ColorBtn: Button {
@@ -60,8 +60,8 @@ ApplicationWindow {
         x: 5; y: window.height - height - 5; z: 3
         padding: 5
         contentItem: Row {
-            ColorBtn { palette{highlight: '#ef476f';buttonText: '#515253'}}
-            ColorBtn { palette{highlight: '#ffd166';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#a3d4d6';buttonText: '#515253'}}
+            ColorBtn { palette{highlight: '#b0d0e9';buttonText: '#515253'}}
             ColorBtn { palette{highlight: '#06d6a0';buttonText: '#515253'}}
             ColorBtn { palette{highlight: '#d5b9ff';buttonText: '#515253'}}
             ColorBtn { palette{highlight: '#515255';buttonText: '#a4a5a6'}}
