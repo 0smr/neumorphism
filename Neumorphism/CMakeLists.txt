@@ -12,7 +12,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Quick)
 if(QT_VERSION_MAJOR EQUAL 6)
-    find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml)
+    find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml ShaderTools)
     set(QT_LIBS Qt::Core Qt::Quick Qt::Qml)
     qt_add_resources(resource_file ${CMAKE_CURRENT_SOURCE_DIR}/neumorphism.qrc)
 else()
@@ -25,3 +25,13 @@ add_library(neumorphism OBJECT ${resource_file})
 
 target_include_directories(neumorphism PUBLIC .)
 target_link_libraries(neumorphism ${QT_LIBS})
+
+file(GLOB SHADER_SOURCES
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.frag
+    ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.vert
+)
+qt_add_shaders(neumorphism "neumorphism_shaders"
+    PREFIX "/Neumorphism"
+    FILES ${SHADER_SOURCES}
+)

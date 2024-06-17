@@ -22,21 +22,6 @@ Control {
             readonly property real smoothstp: 0.5 / width
             readonly property color color: control.palette.base;
 
-            fragmentShader: "
-                varying highp vec2 qt_TexCoord0;
-                uniform highp float qt_Opacity;
-                uniform highp float count;
-                uniform highp float dashWidth;
-                uniform highp float borderWidth;
-                uniform highp float smoothstp;
-                uniform highp vec4 color;
-
-                void main() {
-                    highp vec2 normal = qt_TexCoord0 - vec2(0.5);
-                    gl_FragColor = color;
-                    highp float ticks = smoothstep(0.0, 20 * smoothstp / count, -abs(fract(atan(normal.x, normal.y) * 57.2958 / count) - 0.5) + dashWidth / count);
-                    highp float ring = smoothstep(0.0, smoothstp, -abs(length(normal) - 0.5 + borderWidth) + borderWidth);
-                    gl_FragColor = gl_FragColor * ring * ticks;
-                }"
+            fragmentShader: "qrc:/Neumorphism/shaders/dashed-ring.frag.qsb"
         }
 }

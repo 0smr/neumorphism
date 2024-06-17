@@ -35,7 +35,7 @@ T.BusyIndicator {
             property color light: Qt.lighter(color, 1.15)
             property color dark: Qt.darker(color, 1.5 - color.hslLightness/2)
             property vector4d attrs: Qt.vector4d(30/width, -135 * 0.017453, 0.1, width/15);
-            fragmentShader: "qrc:/Neumorphism/shaders/wave.glsl"
+            fragmentShader: "qrc:/Neumorphism/shaders/wave.frag.qsb"
         }
     }
 }

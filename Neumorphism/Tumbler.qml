@@ -58,21 +58,6 @@ T.Tumbler {
         readonly property real _xrad: control.xrad;
         readonly property real _gapsize: control.gapsize/2;
 
-        fragmentShader: "
-            varying highp vec2 qt_TexCoord0;
-            uniform highp float qt_Opacity;
-            uniform highp float _xrad;
-            uniform highp float _gapsize;
-            uniform mediump vec4 _shade;
-            uniform mediump vec4 _highlight;
-
-            void main() {
-                highp vec2 coord = 2. * qt_TexCoord0 - 1.0;
-                highp float h = smoothstep(0.0, 0.20, -abs(coord.x) + _xrad);
-                highp float v = smoothstep(0.0, 0.50, -abs(coord.y) + 0.58);
-                highp float gap = smoothstep(0.0, 0.01, abs(coord.x) - _gapsize);
-                highp vec4 color = qt_TexCoord0.x > 0.5 ? _shade : _highlight;
-                gl_FragColor = color * h * v * gap * qt_Opacity;
-            }"
+        fragmentShader: "qrc:/Neumorphism/shaders/tumbler.frag.qsb"
     }
 }

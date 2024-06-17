@@ -24,11 +24,11 @@ QtObject {
         return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
     }
 
-    function invertColor(color) {
+    function invertColor(color: color): color {
         return Qt.rgba(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0);
     }
 
-    function alpha(color: color, alpha: real) {
+    function alpha(color: color, alpha: real): color {
         const {r,g,b} = color;
         return Qt.rgba(r, g, b, alpha);
     }

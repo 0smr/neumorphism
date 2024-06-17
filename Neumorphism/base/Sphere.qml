@@ -22,6 +22,6 @@ T.Control {
         property real angle: -45
         property real dist: 2.5
 
-        fragmentShader: "qrc:/Neumorphism/shaders/pseudo-sphere.glsl"
+        fragmentShader: "qrc:/Neumorphism/shaders/pseudo-sphere.frag.qsb"
     }
 }
