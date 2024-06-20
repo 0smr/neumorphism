@@ -47,6 +47,6 @@ Control {
             }
         }
 
-        fragmentShader: "qrc:/Neumorphism/shaders/neum.glsl"
+        fragmentShader: "qrc:/Neumorphism/shaders/neum.frag.qsb"
     }
 }

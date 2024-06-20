@@ -19,7 +19,7 @@
         <file>TextArea.qml</file>
         <file>TextField.qml</file>
         <file>Tumbler.qml</file>
-        <file>HorizontalSeprator.qml</file>
+        <file>HorizontalSeparator.qml</file>
         <file>BusyIndicator.qml</file>
         <file>SplitView.qml</file>
         <file>Frame.qml</file>
@@ -28,10 +28,5 @@
         <file>StackView.qml</file>
         <file>qmldir</file>
         <file>script.js</file>
-        <file>shaders/neum.glsl</file>
-        <file>shaders/neum.frag</file>
-        <file>shaders/wave.glsl</file>
-        <file>shaders/pseudo-sphere.glsl</file>
-        <file>shaders/cheap-sphere.glsl</file>
     </qresource>
 </RCC>
